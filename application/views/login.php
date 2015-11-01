@@ -6,13 +6,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Welcome to <?=APP_NAME?></title>	
-	<link href="<?=base_url('assets/css/bootstrap.min.css')?>" type="text/css" rel="stylesheet"/>
+	<link href="<?=base_url('assets/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css')?>" type="text/css" rel="stylesheet"/>
 	<link href="<?=base_url('assets/css/signin.css')?>" type="text/css" rel="stylesheet"/>
 	<link href="<?=base_url('assets/css/sticky-footer.css')?>" type="text/css" rel="stylesheet"/>
 	<link href="<?=base_url('assets/css/style.css')?>" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<?=anchor('home',APP_NAME,array('class'=>'navbar-brand'))?>

@@ -1,22 +1,22 @@
-
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User_mdl extends CI_Model {
-	private $tbl_name = 'user';
+class Kendaraan_mdl extends CI_Model {
+	private $tbl_name = 'kendaraan';
 	private $tbl_key = 'id';
 	function query(){
-		$data[] = $this->db->select(array('user.*','user_level.name as level_name','user_status.name as status_name'));
-		$data[] = $this->db->join('user_level','user.level=user_level.id','left');
-		$data[] = $this->db->join('user_status','user.status=user_status.id','left');
+		$data[] = $this->db->select(array('kendaraan.*','kendaraan_tipe.nama as tipe_nama','kendaraan_status.nama as status_nama'));
+		$data[] = $this->db->join('kendaraan_tipe','kendaraan.tipe=kendaraan_tipe.id','left');
+		$data[] = $this->db->join('kendaraan_status','kendaraan.status=kendaraan_status.id','left');
 		$data[] = $this->search();
-		$data[] = $this->where('level');
-		$data[] = $this->where('status');		
+		$data[] = $this->where('tipe');
+		$data[] = $this->where('status');
 		$data[] = $this->db->order_by($this->general_lib->get_order_column(),$this->general_lib->get_order_type());
 		$data[] = $this->db->offset($this->general_lib->get_offset());
 		return $data;
 	}
 	function get(){
 		$this->query();
+		$this->db->limit($this->general_lib->get_limit());
 		return $this->db->get($this->tbl_name);
 	}
 	function add($data){
@@ -41,7 +41,7 @@ class User_mdl extends CI_Model {
 	function search(){
 		$result = $this->input->get('search');
 		if($result <> ''){
-			return $this->db->where('(fullname like "%'.$result.'%" or username like "%'.$result.'%")');
+			return $this->db->where('(nopol like "%'.$result.'%" or nomes like "%'.$result.'%" or nocha like "%'.$result.'%" or kilometer like "%'.$result.'%")');
 		}		
 	}
 	function where($field){
@@ -50,20 +50,29 @@ class User_mdl extends CI_Model {
 			return $this->db->where($field,$result);
 		}		
 	}
-	function user_level_dropdown(){
-		$result = $this->db->get('user_level')->result();
-		$data[''] = '- Level -';
+	function kendaraan_dropdown(){
+		$this->db->where('status','1');
+		$result = $this->db->get('kendaraan')->result();
+		$data[''] = '- Kendaraan -';
 		foreach($result as $r){
-			$data[$r->id] = $r->name;
+			$data[$r->id] = $r->nopol;
 		}
 		return $data;
 	}	
-	function user_status_dropdown(){
-		$result = $this->db->get('user_status')->result();
+	function kendaraan_tipe_dropdown(){
+		$result = $this->db->get('kendaraan_tipe')->result();
+		$data[''] = '- Tipe -';
+		foreach($result as $r){
+			$data[$r->id] = $r->nama;
+		}
+		return $data;
+	}	
+	function kendaraan_status_dropdown(){
+		$result = $this->db->get('kendaraan_status')->result();
 		$data[''] = '- Status -';
 		foreach($result as $r){
-			$data[$r->id] = $r->name;
+			$data[$r->id] = $r->nama;
 		}
 		return $data;
-	}	
+	}		
 }

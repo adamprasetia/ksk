@@ -1,23 +1,23 @@
-
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User_mdl extends CI_Model {
-	private $tbl_name = 'user';
+class Servis_detail_mdl extends CI_Model {
+	private $tbl_name = 'servis_detail';
 	private $tbl_key = 'id';
 	function query(){
-		$data[] = $this->db->select(array('user.*','user_level.name as level_name','user_status.name as status_name'));
-		$data[] = $this->db->join('user_level','user.level=user_level.id','left');
-		$data[] = $this->db->join('user_status','user.status=user_status.id','left');
+		$data[] = $this->db->select(array('servis.*','servis_tipe.nama as tipe_nama','kendaraan.nopol as nopol'));
+		$data[] = $this->db->join('servis_tipe','servis.tipe=servis_tipe.id','left');
+		$data[] = $this->db->join('kendaraan','servis.kendaraan=kendaraan.id','left');
 		$data[] = $this->search();
-		$data[] = $this->where('level');
-		$data[] = $this->where('status');		
+		$data[] = $this->where('servis.tipe','tipe');
+		$data[] = $this->where('kendaraan');
 		$data[] = $this->db->order_by($this->general_lib->get_order_column(),$this->general_lib->get_order_type());
 		$data[] = $this->db->offset($this->general_lib->get_offset());
 		return $data;
 	}
 	function get(){
 		$this->query();
-		return $this->db->get($this->tbl_name);
+		$this->db->limit($this->general_lib->get_limit());
+		return $this->db->get($this->tbl_name);		
 	}
 	function add($data){
 		$this->db->insert($this->tbl_name,$data);
@@ -34,6 +34,10 @@ class User_mdl extends CI_Model {
 		$this->db->where($field,$value);
 		return $this->db->get($this->tbl_name);	
 	}
+	function delete_from_field($field,$value){
+		$this->db->where($field,$value);
+		$this->db->delete($this->tbl_name);
+	}
 	function count_all(){
 		$this->query();
 		return $this->db->get($this->tbl_name)->num_rows();
@@ -41,29 +45,21 @@ class User_mdl extends CI_Model {
 	function search(){
 		$result = $this->input->get('search');
 		if($result <> ''){
-			return $this->db->where('(fullname like "%'.$result.'%" or username like "%'.$result.'%")');
+			return $this->db->where('(nomor like "%'.$result.'%" or nopol like "%'.$result.'%")');
 		}		
 	}
-	function where($field){
-		$result = $this->input->get($field);
+	function where($field,$key=''){
+		$result = $this->input->get(($key<>''?$key:$field));;
 		if($result <> ''){
 			return $this->db->where($field,$result);
 		}		
 	}
-	function user_level_dropdown(){
-		$result = $this->db->get('user_level')->result();
-		$data[''] = '- Level -';
+	function servis_tipe_dropdown(){
+		$result = $this->db->get('servis_tipe')->result();
+		$data[''] = '- Tipe -';
 		foreach($result as $r){
-			$data[$r->id] = $r->name;
+			$data[$r->id] = $r->nama;
 		}
 		return $data;
-	}	
-	function user_status_dropdown(){
-		$result = $this->db->get('user_status')->result();
-		$data[''] = '- Status -';
-		foreach($result as $r){
-			$data[$r->id] = $r->name;
-		}
-		return $data;
-	}	
+	}			
 }

@@ -60,7 +60,7 @@ class General_lib{
 	public function get_order_type(){
 		$result = $this->ci->input->get('order_type');
 		if($result==''){
-			$data = 'asc';
+			$data = 'desc';
 		}else{
 			$data = $result;
 		}

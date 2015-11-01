@@ -1,79 +1,76 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User extends MY_Controller {
+class Kendaraan extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('kendaraan_mdl');
 	}
 	public function index(){
 		$offset = $this->general_lib->get_offset();
 		$limit = $this->general_lib->get_limit();
-		$total = $this->user_mdl->count_all();
+		$total = $this->kendaraan_mdl->count_all();
 
-		$xdata['action'] = 'user/search'.$this->_filter();
-		$xdata['action_delete'] = 'user/delete'.$this->_filter();
-		$xdata['add_btn'] = anchor('user/add','Tambah',array('class'=>'btn btn-warning btn-sm'));
+		$xdata['action'] = 'kendaraan/search'.$this->_filter();
+		$xdata['action_delete'] = 'kendaraan/delete'.$this->_filter();
+		$xdata['add_btn'] = anchor('kendaraan/add','Tambah',array('class'=>'btn btn-warning btn-sm'));
 		$xdata['delete_btn'] = '<button id="delete-btn" class="btn btn-warning btn-sm">Delete Checked</button>';
 
 		$this->table->set_template(tbl_tmp());
 		$head_data = array(
-			'fullname'=>'Fullname'
-			,'username'=>'Username'
-			,'level_name'=>'Level'
-			,'ip_login'=>'Last IP Login'
-			,'user_agent'=>'Last User Agent'
-			,'date_login'=>'Last Login'
-			,'status_name'=>'Status'
+			'nopol'=>'Nomor Polisi',
+			'tipe_nama'=>'Tipe',
+			'nomes'=>'Nomor Mesin',
+			'nocha'=>'Nomor Chassis',
+			'status_nama'=>'Status'
 		);
 		$heading[] = form_checkbox(array('id'=>'selectAll','value'=>1));
 		$heading[] = '#';
 		foreach($head_data as $r => $value){
-			$heading[] = anchor('user'.$this->_filter(array('order_column'=>"$r",'order_type'=>$this->general_lib->order_type($r))),"$value ".$this->general_lib->order_icon("$r"));
+			$heading[] = anchor('kendaraan'.$this->_filter(array('order_column'=>"$r",'order_type'=>$this->general_lib->order_type($r))),"$value ".$this->general_lib->order_icon("$r"));
 		}		
 		$heading[] = 'Action';
 		$this->table->set_heading($heading);
-		$result = $this->user_mdl->get()->result();
+		$result = $this->kendaraan_mdl->get()->result();
 		$i=1+$offset;
 		foreach($result as $r){
 			$this->table->add_row(
 				array('data'=>form_checkbox(array('name'=>'check[]','value'=>$r->id)),'width'=>'10px'),
 				$i++,
-				$r->fullname,
-				$r->username,
-				$r->level_name,
-				$r->ip_login,
-				$r->user_agent,
-				$r->date_login,			
-				'<label class="label label-'.($r->status_name=='On'?'success':'danger').'">'.$r->status_name.'</label>',
-				anchor('user/edit/'.$r->id.$this->_filter(),'Edit')
-				."&nbsp;|&nbsp;".anchor('user/delete/'.$r->id.$this->_filter(),'Delete',array('onclick'=>"return confirm('you sure')"))
+				$r->nopol,
+				$r->tipe_nama,
+				$r->nomes,
+				$r->nocha,
+				'<label class="label label-'.($r->status_nama=='On'?'success':'danger').'">'.$r->status_nama.'</label>',
+				anchor('kendaraan/edit/'.$r->id.$this->_filter(),'Edit')
+				."&nbsp;|&nbsp;".anchor('kendaraan/delete/'.$r->id.$this->_filter(),'Delete',array('onclick'=>"return confirm('you sure')"))
 			);
 		}
 		$xdata['table'] = $this->table->generate();
 		$xdata['total'] = 'Showing '.($offset+1).' to '.($offset+$limit).' of '.number_format($total).' entries';
 		
 		$config = pag_tmp();
-		$config['base_url'] = site_url("user".$this->_filter());
+		$config['base_url'] = site_url("kendaraan".$this->_filter());
 		$config['total_rows'] = $total;
 		$config['per_page'] = $limit;
 
 		$this->pagination->initialize($config); 
 		$xdata['pagination'] = $this->pagination->create_links();
 
-		$data['content'] = $this->load->view('user_list',$xdata,true);
+		$data['content'] = $this->load->view('kendaraan_list',$xdata,true);
 		$this->load->view('template',$data);
 	}
 	public function search(){
 		$data = array(
 			'search'=>$this->input->post('search'),
 			'limit'=>$this->input->post('limit'),
-			'level'=>$this->input->post('level'),
+			'tipe'=>$this->input->post('tipe'),
 			'status'=>$this->input->post('status')
 		);
-		redirect('user'.$this->_filter($data));		
+		redirect('kendaraan'.$this->_filter($data));		
 	}
 	public function _filter($add = array()){
 		$str = '?avenger=1';
-		$data = array('order_column'=>0,'order_type'=>0,'limit'=>0,'offset'=>0,'search'=>0,'level'=>0,'status'=>0);
+		$data = array('order_column'=>0,'order_type'=>0,'limit'=>0,'offset'=>0,'search'=>0,'tipe'=>0,'status'=>0);
 		$result = array_diff_key($data,$add);
 		foreach($result as $r => $val){			
 			if($this->input->get($r)<>''){
@@ -91,67 +88,73 @@ class User extends MY_Controller {
 	}	
 	private function _field(){
 		$data = array(
-			'fullname'=>$this->input->post('fullname'),
-			'username'=>$this->input->post('username'),
-			'password'=>$this->input->post('password'),
-			'level'=>$this->input->post('level'),
+			'nopol'=>$this->input->post('nopol'),
+			'tipe'=>$this->input->post('tipe'),
+			'nomes'=>$this->input->post('nomes'),
+			'nocha'=>$this->input->post('nocha'),
 			'status'=>$this->input->post('status')
 		);
 		return $data;		
 	}
 	private function _set_rules(){
-		$this->form_validation->set_rules('fullname','Fullname','required|trim');
-		$this->form_validation->set_rules('username','Username','required|trim');
-		$this->form_validation->set_rules('password','Password','required|trim');
+		$this->form_validation->set_rules('nopol','Nomor Polisi','required|trim');
+		$this->form_validation->set_rules('tipe','Tipe','required|trim');
+		$this->form_validation->set_rules('nomes','Nomor Mesin','required|trim');
+		$this->form_validation->set_rules('nocha','Nomor Chassis','required|trim');
+		$this->form_validation->set_rules('status','Status','required|trim');
 	}
 	public function add(){
 		$this->_set_rules();
 		if($this->form_validation->run()===false){
-			$xdata['action'] = 'user/add'.$this->_filter();
-			$xdata['breadcrumb'] = 'user'.$this->_filter();
+			$xdata['action'] = 'kendaraan/add'.$this->_filter();
+			$xdata['breadcrumb'] = 'kendaraan'.$this->_filter();
 			$xdata['heading'] = 'New';
 			$xdata['owner'] = '';
-			$data['content'] = $this->load->view('user_form',$xdata,true);
+			$data['content'] = $this->load->view('kendaraan_form',$xdata,true);
 			$this->load->view('template',$data);
 		}else{
 			$data = $this->_field();
 			$data['user_create'] = $this->session->userdata('user_login');
 			$data['date_create'] = date('Y-m-d H:i:s');
-			$this->user_mdl->add($data);
+			$this->kendaraan_mdl->add($data);
 			$this->session->set_flashdata('alert','<div class="alert alert-success">Tambah Data Sukses</div>');
-			redirect('user/add'.$this->_filter());
+			redirect('kendaraan/add'.$this->_filter());
 		}
 	}
 	public function edit($id){
 		$this->_set_rules();
 		if($this->form_validation->run()===false){
-			$xdata['row'] = $this->user_mdl->get_from_field('id',$id)->row();
-			$xdata['action'] = 'user/edit/'.$id.$this->_filter();
-			$xdata['breadcrumb'] = 'user'.$this->_filter();
+			$xdata['row'] = $this->kendaraan_mdl->get_from_field('id',$id)->row();
+			$xdata['action'] = 'kendaraan/edit/'.$id.$this->_filter();
+			$xdata['breadcrumb'] = 'kendaraan'.$this->_filter();
 			$xdata['heading'] = 'Update';
 			$xdata['owner'] = owner($xdata['row']);
-			$data['content'] = $this->load->view('user_form',$xdata,true);
+			$data['content'] = $this->load->view('kendaraan_form',$xdata,true);
 			$this->load->view('template',$data);
 		}else{
 			$data = $this->_field();
 			$data['user_update'] = $this->session->userdata('user_login');
 			$data['date_update'] = date('Y-m-d H:i:s');
-			$this->user_mdl->edit($id,$data);
+			$this->kendaraan_mdl->edit($id,$data);
 			$this->session->set_flashdata('alert','<div class="alert alert-success">Edit Data Sukses</div>');
-			redirect('user/edit/'.$id.$this->_filter());
+			redirect('kendaraan/edit/'.$id.$this->_filter());
 		}
 	}
 	public function delete($id=''){
 		if($id<>''){
-			$this->user_mdl->delete($id);
+			$this->kendaraan_mdl->delete($id);
 		}
 		$check = $this->input->post('check');
 		if($check<>''){
 			foreach($check as $c){
-				$this->user_mdl->delete($c);
+				$this->kendaraan_mdl->delete($c);
 			}
 		}
 		$this->session->set_flashdata('alert','<div class="alert alert-success">Delete Data Sukses</div>');
-		redirect('user'.$this->_filter());
+		redirect('kendaraan'.$this->_filter());
+	}
+	public function get_kendaraan($id){
+		$result = $this->kendaraan_mdl->get_from_field('id',$id)->row_array();
+		echo json_encode($result);
 	}
 }

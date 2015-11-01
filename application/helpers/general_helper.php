@@ -1,7 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 function tbl_tmp(){
+    $data = array(
+        'table_open'=>'<table border="0" cellpadding="4" cellspacing="0" class="table table-striped table-bordered">'
+    );
+    return $data;
+}
+function tbl_tmp_servis(){
 	$data = array(
-		'table_open'=>'<table border="0" cellpadding="4" cellspacing="0" class="table table-striped table-bordered">'
+		'table_open'=>'<table border="0" cellpadding="4" cellspacing="0" class="table table-striped table-bordered table-servis">'
 	);
 	return $data;
 }
@@ -136,3 +142,19 @@ function getBrowser($agent = null){
         'pattern'    => $pattern
     );
 } 
+function format_ymd($date){
+    if($date <> '' && $date <> null){
+        $x = explode("/",$date);
+        return $x[2]."-".$x[1]."-".$x[0];
+    }else{
+        return "0000-00-00";
+    }
+}
+function format_dmy($date){
+    if($date <> '' && $date <> null){
+        $x = explode("-",$date);
+        return $x[2]."/".$x[1]."/".$x[0];
+    }else{
+        return "00/00/0000";
+    }
+}
