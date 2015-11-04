@@ -50,6 +50,7 @@ class Servis extends MY_Controller {
 				array('data'=>number_format($r->total_harga),'align'=>'right'),
 				anchor('servis/edit/'.$r->id.$this->_filter(),'Edit')
 				."&nbsp;|&nbsp;".anchor('servis/delete/'.$r->id.$this->_filter(),'Delete',array('onclick'=>"return confirm('you sure')"))
+				."&nbsp;|&nbsp;".anchor('servis/print_detail/'.$r->id,'Print',array('target'=>'_blank'))
 			);
 		}
 		$xdata['table'] = $this->table->generate();
@@ -158,7 +159,7 @@ class Servis extends MY_Controller {
 
 			$this->table->set_template(tbl_tmp_servis());
 			$this->table->set_heading('Komponen Mesin','Jenis Perlakuan','Satuan','Harga Satuan','Total Harga','Action');
-			$servis_detail = $this->servis_detail_mdl->get_from_field('servis',$id);
+			$servis_detail = $this->general_mdl->get_from_field('servis_detail','servis',$id);
 			if($servis_detail->num_rows()>0){
 				foreach($servis_detail->result() as $r){
 					$this->table->add_row($this->_field_servis_detail($r));
@@ -217,5 +218,112 @@ class Servis extends MY_Controller {
 	}
 	public function tambah_servis(){
 		$this->load->view('servis_item');
+	}
+	public function print_detail($id=''){	
+		$servis = $this->general_mdl->get_from_field('servis','id',$id)->row();
+		$servis_tipe = $this->general_mdl->get_from_field('servis_tipe','id',$servis->tipe)->row();
+		$kendaraan = $this->general_mdl->get_from_field('kendaraan','id',$servis->kendaraan)->row();
+		$kendaraan_tipe = $this->general_mdl->get_from_field('kendaraan_tipe','id',$kendaraan->tipe)->row();
+		require_once "./assets/lib/fpdf/fpdf.php";
+		$pdf = new FPDF();
+		$pdf->AliasNbPages();
+		$pdf->AddPage('P','A4');
+		$pdf->Image('./assets/img/logo.gif', 12, 10, 25, 0);
+		$pdf->SetFont('Arial','B',10);
+		$pdf->setX(35);
+		$pdf->Cell(0,5,'PEMERINTAH DAERAH KABUPATEN CIANJUR',0,0,'C');
+		$pdf->Ln(5);
+		$pdf->setX(35);
+		$pdf->Cell(0,5,'DINAS KEBERSIHAN DAN PERTAMANAN',0,0,'C');
+		$pdf->Ln(7);
+		$pdf->setX(40);
+		$pdf->SetFont('Arial','B',8);
+		$pdf->Cell(20,5,'NOMOR',1,0,'C');
+		$pdf->Cell(75,5,$servis->nomor,1,0,'C');
+		$pdf->Ln(7);
+		$pdf->setX(40);
+		$pdf->SetFont('Arial','B',12);
+		$pdf->Cell(95,10,'KARTU SEHAT KENDARAAN',1,0,'C');
+		$pdf->Ln(12);
+		$pdf->SetFont('Arial','',8);
+		$pdf->Cell(30,5,'NO. MESIN',0,0,'L');
+		$pdf->Cell(95,5,': '.$kendaraan->nomes,0,0,'L');
+		$pdf->Ln(5);
+		$pdf->Cell(30,5,'TYPE SERVIS',0,0,'L');
+		$pdf->Cell(95,5,': '.$servis_tipe->nama,0,0,'L');
+		$pdf->Ln(5);
+		$pdf->Cell(30,5,'TAHUN ANGGARAN',0,0,'L');
+		$pdf->Cell(95,5,': '.date_format(date_create($servis->tanggal),'Y'),0,0,'L');
+
+		$pdf->setXY(140,22);
+		$pdf->Cell(30,5,'NO KENDARAAN',1,0,'L');
+		$pdf->Cell(0,5,$kendaraan->nopol,1,0,'C');
+
+		$pdf->setXY(140,27);
+		$pdf->Cell(30,5,'TIPE KENDARAAN',1,0,'L');
+		$pdf->Cell(0,5,$kendaraan_tipe->nama,1,0,'C');
+
+		$pdf->setXY(140,41);
+		$pdf->Cell(30,5,'TANGGAL',0,0,'L');
+		$pdf->Cell(0,5,': '.date_format(date_create($servis->tanggal),'d'),0,0,'L');
+
+		$pdf->setXY(140,46);
+		$pdf->Cell(30,5,'BULAN',0,0,'L');
+		$pdf->Cell(0,5,': '.date_format(date_create($servis->tanggal),'M'),0,0,'L');
+
+		$pdf->setXY(140,51);
+		$pdf->Cell(30,5,'KILOMETER',0,0,'L');
+		$pdf->Cell(0,5,': '.$servis->kilometer,0,0,'L');
+
+		$pdf->Ln(10);
+		$pdf->SetFont('Arial','B',8);
+		$pdf->Cell(70,5,'KOMPONEN DASAR MESIN',1,0,'C');
+		$pdf->Cell(30,5,'JENIS PERLAKUAN',1,0,'C');
+		$pdf->Cell(30,5,'SATUAN',1,0,'C');
+		$pdf->Cell(30,5,'HARGA SATUAN',1,0,'C');
+		$pdf->Cell(0,5,'TOTAL HARGA',1,0,'C');
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial','',8);
+		$result = $this->general_mdl->get_from_field('servis_detail','servis',$servis->id)->result();
+		$total = 0;
+		foreach($result as $r){
+			$komponen = $this->general_mdl->get_from_field('komponen','id',$r->komponen)->row();
+			$komponen_satuan = $this->general_mdl->get_from_field('komponen_satuan','id',$komponen->satuan)->row();
+			$aksi = $this->general_mdl->get_from_field('komponen_aksi','id',$r->aksi)->row();
+			$pdf->Cell(70,5,$komponen->nama.' '.($r->komponen_lain<>''?':'.$r->komponen_lain:''),1,0,'L');
+			$pdf->Cell(30,5,$aksi->nama,1,0,'C');
+			$pdf->Cell(30,5,number_format($r->satuan).' '.$komponen_satuan->nama,1,0,'R');
+			$pdf->Cell(30,5,number_format($r->harga),1,0,'R');
+			$pdf->Cell(0,5,number_format($r->satuan*$r->harga),1,0,'R');
+			$pdf->Ln(5);			
+			$total += $r->satuan*$r->harga;
+		}
+		$pdf->SetFont('Arial','B',8);
+		$pdf->Cell(160,5,'Total',1,0,'L');
+		$pdf->Cell(0,5,number_format($total),1,0,'R');
+		$pdf->Ln(10);			
+
+		$pdf->Cell(80,5,'',0,0,'C');
+		$pdf->Cell(0,5,'Mengetahui,',0,0,'C');
+		$pdf->Ln(5);
+
+		$pdf->Cell(80,5,'Penanggung Jawab Bengkel',0,0,'C');
+		$pdf->Cell(0,5,'Mandor Armada',0,0,'C');
+		$pdf->Ln(5);			
+		$pdf->Cell(80,5,'Dinas Kebersihan dan Pertamanan',0,0,'C');
+		$pdf->Cell(0,5,'Dinas Kebersihan dan Pertamanan',0,0,'C');
+		$pdf->Ln(5);			
+		$pdf->Cell(80,5,'Kabupaten Cianjur',0,0,'C');
+		$pdf->Cell(0,5,'Kabupaten Cianjur',0,0,'C');
+		$pdf->Ln(20);			
+		$pdf->SetFont('Arial','BU',8);
+		$pdf->Cell(80,5,'Rusdi Hermawan',0,0,'C');
+		$pdf->Cell(0,5,'Deden Suparman, SIP',0,0,'C');
+		$pdf->Ln(5);			
+		$pdf->SetFont('Arial','B',8);
+		$pdf->Cell(80,5,'NIP. 19610912 200701 1 002',0,0,'C');
+		$pdf->Cell(0,5,'NIP. 19710316 200901 1 003',0,0,'C');
+
+		$pdf->Output();		
 	}
 }

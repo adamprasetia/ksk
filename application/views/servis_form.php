@@ -17,7 +17,7 @@
 			<div class="col-md-6">
 				<div class="form-group form-inline">
 					<?=form_label('Nomor','nomor',array('class'=>'control-label'))?>
-					<?=form_input(array('name'=>'nomor','class'=>'form-control input-sm','maxlength'=>'50','autocomplete'=>'off','autofocus'=>'autofocus','value'=>set_value('nomor',(isset($row->nomor)?$row->nomor:'')),'required'=>'required'))?>
+					<?=form_input(array('name'=>'nomor','class'=>'form-control input-sm','maxlength'=>'50','size'=>'60','autocomplete'=>'off','autofocus'=>'autofocus','value'=>set_value('nomor',(isset($row->nomor)?$row->nomor:'')),'required'=>'required'))?>
 					<small><?=form_error('nomor')?></small>
 				</div>
 				<div class="form-group form-inline">
