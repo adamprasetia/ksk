@@ -10,6 +10,7 @@ class Servis_rekap_mdl extends CI_Model {
 			'servis_tipe.nama as tipe',
 			'servis.kilometer',
 			'komponen.nama as komponen_nama',
+			'komponen_satuan.nama as komponen_satuan_nama',
 			'servis_detail.komponen_lain',
 			'servis_detail.satuan',
 			'servis_detail.harga',
@@ -21,6 +22,7 @@ class Servis_rekap_mdl extends CI_Model {
 		$data[] = $this->db->join('servis_detail','servis.id=servis_detail.servis','left');
 		$data[] = $this->db->join('komponen','servis_detail.komponen=komponen.id','left');
 		$data[] = $this->db->join('komponen_aksi','komponen_aksi.id=servis_detail.aksi','left');
+		$data[] = $this->db->join('komponen_satuan','komponen_satuan.id=komponen.satuan','left');
 		$data[] = $this->where('kendaraan');
 		$data[] = $this->where_date('date','tanggal');
 		$data[] = $this->db->order_by($this->general_lib->get_order_column('servis.tanggal'),$this->general_lib->get_order_type('desc'));

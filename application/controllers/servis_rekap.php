@@ -41,7 +41,7 @@ class Servis_rekap extends MY_Controller {
 					$r->kilometer,
 					($r->komponen_lain<>''?$r->komponen_lain:$r->komponen_nama),
 					$r->komponen_aksi_nama,
-					array('data'=>number_format($r->satuan),'align'=>'right'),
+					array('data'=>number_format($r->satuan).'&nbsp;'.$r->komponen_satuan_nama,'align'=>'right'),
 					array('data'=>number_format($r->harga),'align'=>'right'),
 					array('data'=>number_format($r->total),'align'=>'right')
 				);
@@ -120,7 +120,7 @@ class Servis_rekap extends MY_Controller {
 			$pdf->Cell(30,5,$r->kilometer,1,0,'C');
 			$pdf->Cell(60,5,($r->komponen_lain<>''?$r->komponen_lain:$r->komponen_nama),1,0,'L');
 			$pdf->Cell(20,5,$r->komponen_aksi_nama,1,0,'C');
-			$pdf->Cell(20,5,number_format($r->satuan),1,0,'R');
+			$pdf->Cell(20,5,number_format($r->satuan).' '.$r->komponen_satuan_nama,1,0,'R');
 			$pdf->Cell(30,5,number_format($r->harga),1,0,'R');
 			$pdf->Cell(0,5,number_format($r->total),1,0,'R');
 			$pdf->Ln(5);			
