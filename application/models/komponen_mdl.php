@@ -41,7 +41,7 @@ class Komponen_mdl extends CI_Model {
 	function search(){
 		$result = $this->input->get('search');
 		if($result <> ''){
-			return $this->db->where('(nama like "%'.$result.'%")');
+			return $this->db->where('(komponen.nama like "%'.$result.'%")');
 		}		
 	}
 	function where($field){

@@ -1,4 +1,7 @@
 body{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: #333;
 	margin-top:30px;
@@ -45,8 +48,11 @@ body{
   background-color: #eee;
   border-color: #ddd;
 }
-.breadcrumb,.owner{
-	margin:0;padding:0;
+.breadcrumb{
+    margin-bottom:10px;    
+}
+.panel-heading .breadcrumb,.owner{
+    margin:0;padding:0;
     display:inline-block;
     line-height:30px;
 }

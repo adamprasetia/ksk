@@ -43,10 +43,11 @@ class Kendaraan extends MY_Controller {
 				'<label class="label label-'.($r->status_nama=='On'?'success':'danger').'">'.$r->status_nama.'</label>',
 				anchor('kendaraan/edit/'.$r->id.$this->_filter(),'Edit')
 				."&nbsp;|&nbsp;".anchor('kendaraan/delete/'.$r->id.$this->_filter(),'Delete',array('onclick'=>"return confirm('you sure')"))
+				."&nbsp;|&nbsp;".anchor('kendaraan/detail/'.$r->id.$this->_filter(),'Detail')
 			);
 		}
 		$xdata['table'] = $this->table->generate();
-		$xdata['total'] = 'Showing '.($offset+1).' to '.($offset+$limit).' of '.number_format($total).' entries';
+		$xdata['total'] = page_total($offset,$limit,$total);
 		
 		$config = pag_tmp();
 		$config['base_url'] = site_url("kendaraan".$this->_filter());
@@ -156,5 +157,27 @@ class Kendaraan extends MY_Controller {
 	public function get_kendaraan($id){
 		$result = $this->kendaraan_mdl->get_from_field('id',$id)->row_array();
 		echo json_encode($result);
+	}
+	public function detail($id){
+			$xdata['breadcrumb'] = 'kendaraan'.$this->_filter();
+			$xdata['kendaraan'] = $this->kendaraan_mdl->get_from_field('kendaraan.id',$id,1)->row();
+
+			//servis detail
+			$this->table->set_template(tbl_tmp_servis());
+			$this->table->set_heading('No','Tanggal','Komponen Mesin','Jenis Perlakuan');
+			$servis_history = $this->general_mdl->get_servis_history($id)->result();
+			$i=1;
+			foreach($servis_history as $r){
+				$this->table->add_row(
+					$i++,
+					format_dmy($r->tanggal),
+					($r->komponen_lain<>''?$r->komponen_lain:$r->komponen_nama),
+					$r->komponen_aksi_nama
+				);
+			}
+			$xdata['servis_history'] = $this->table->generate();
+
+			$data['content'] = $this->load->view('kendaraan_detail',$xdata,true);
+			$this->load->view('template',$data);		
 	}
 }

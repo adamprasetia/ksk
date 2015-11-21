@@ -30,7 +30,8 @@ class Kendaraan_mdl extends CI_Model {
 		$this->db->where($this->tbl_key,$id);
 		$this->db->delete($this->tbl_name);
 	}
-	function get_from_field($field,$value){
+	function get_from_field($field,$value,$param=0){
+		if($param==1){$this->query();}
 		$this->db->where($field,$value);
 		return $this->db->get($this->tbl_name);	
 	}
@@ -41,7 +42,7 @@ class Kendaraan_mdl extends CI_Model {
 	function search(){
 		$result = $this->input->get('search');
 		if($result <> ''){
-			return $this->db->where('(nopol like "%'.$result.'%" or nomes like "%'.$result.'%" or nocha like "%'.$result.'%" or kilometer like "%'.$result.'%")');
+			return $this->db->where('(nopol like "%'.$result.'%" or nomes like "%'.$result.'%" or nocha like "%'.$result.'%")');
 		}		
 	}
 	function where($field){

@@ -49,7 +49,7 @@ class User extends MY_Controller {
 			);
 		}
 		$xdata['table'] = $this->table->generate();
-		$xdata['total'] = 'Showing '.($offset+1).' to '.($offset+$limit).' of '.number_format($total).' entries';
+		$xdata['total'] = page_total($offset,$limit,$total);
 		
 		$config = pag_tmp();
 		$config['base_url'] = site_url("user".$this->_filter());

@@ -2,6 +2,9 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #eee;
+  background-image:url(../../assets/img/background.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .form-signin {

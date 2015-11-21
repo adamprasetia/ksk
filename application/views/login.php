@@ -5,6 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="shortcut icon" href="http://www.cianjurkab.go.id/images/cjr_icon.png" type="image/x-icon"/>
 	<title>Welcome to <?=APP_NAME?></title>	
 	<link href="<?=base_url('assets/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css')?>" type="text/css" rel="stylesheet"/>
 	<link href="<?=base_url('assets/css/signin.css')?>" type="text/css" rel="stylesheet"/>

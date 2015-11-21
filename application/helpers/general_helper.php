@@ -37,6 +37,9 @@ function owner($id){
     $data .= ' Updated by : <strong>'.$id->user_update.'</strong> ('.$id->date_update.')';
     return $data;
 }
+function page_total($offset,$limit,$total){
+    return 'Showing '.number_format($offset+1).' to '.number_format(($total>$limit?(($offset+$limit)>$total?$total:$offset+$limit):$total)).' of '.number_format($total).' entries';
+}
 function getBrowser($agent = null){
     $u_agent = ($agent!=null)? $agent : $_SERVER['HTTP_USER_AGENT']; 
     $bname = 'Unknown';

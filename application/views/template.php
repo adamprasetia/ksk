@@ -5,10 +5,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="shortcut icon" href="http://www.cianjurkab.go.id/images/cjr_icon.png" type="image/x-icon"/>
 	<title><?=APP_NAME?></title>	
 	<link href="<?=base_url('assets/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css')?>" type="text/css" rel="stylesheet"/>
-	<link href="<?=base_url('assets/lib/jquery-ui-1.11.4/jquery-ui.min.css')?>" type="text/css" rel="stylesheet"/>
-	<link href="<?=base_url('assets/css/signin.css')?>" type="text/css" rel="stylesheet"/>
+	<link href="<?=base_url('assets/lib/jquery-ui-1.11.4.custom/jquery-ui.css')?>" type="text/css" rel="stylesheet"/>
 	<link href="<?=base_url('assets/css/sticky-footer.css')?>" type="text/css" rel="stylesheet"/>
 	<link href="<?=base_url('assets/css/style.css')?>" type="text/css" rel="stylesheet"/>
 </head>
@@ -30,6 +30,7 @@
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='kendaraan'?'active':"")?>"><?=anchor('kendaraan','<span class="glyphicon glyphicon-bed"></span> Kendaraan')?></li>
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='komponen'?'active':"")?>"><?=anchor('komponen','<span class="glyphicon glyphicon-cog"></span> Komponen')?></li>
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='servis'?'active':"")?>"><?=anchor('servis','<span class="glyphicon glyphicon-edit"></span> Servis')?></li>
+					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='servis_rekap'?'active':"")?>"><?=anchor('servis_rekap','<span class="glyphicon glyphicon-print"></span> Rekap Servis')?></li>
 				</ul>		
 				<div class="navbar-right">		
 					<ul class="nav navbar-nav">
@@ -53,7 +54,7 @@
   </footer>  
 
 	<script src="<?=base_url('assets/lib/jquery-1.11.3.min.js')?>"/></script>
-	<script src="<?=base_url('assets/lib/jquery-ui-1.11.4/jquery-ui.min.js')?>"/></script>
+	<script src="<?=base_url('assets/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js')?>"/></script>
 	<script src="<?=base_url('assets/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js')?>"/></script>
 	<script src="<?=base_url('assets/lib/price_format_plugin.js')?>"/></script>
 	<script> var base_url = '<?php echo base_url()?>'</script>

@@ -54,7 +54,7 @@ class Servis extends MY_Controller {
 			);
 		}
 		$xdata['table'] = $this->table->generate();
-		$xdata['total'] = 'Showing '.($offset+1).' to '.($offset+$limit).' of '.number_format($total).' entries';
+		$xdata['total'] = page_total($offset,$limit,$total);
 		
 		$config = pag_tmp();
 		$config['base_url'] = site_url("servis".$this->_filter());
@@ -228,7 +228,7 @@ class Servis extends MY_Controller {
 		$pdf = new FPDF();
 		$pdf->AliasNbPages();
 		$pdf->AddPage('P','A4');
-		$pdf->Image('./assets/img/logo.gif', 12, 10, 25, 0);
+		$pdf->Image('./assets/img/logo.jpg', 12, 10, 25, 0);
 		$pdf->SetFont('Arial','B',10);
 		$pdf->setX(35);
 		$pdf->Cell(0,5,'PEMERINTAH DAERAH KABUPATEN CIANJUR',0,0,'C');

@@ -48,19 +48,19 @@ class General_lib{
 			}	
 		}		
 	}		
-	public function get_order_column(){
+	public function get_order_column($field = 'id'){
 		$result = $this->ci->input->get('order_column');
 		if($result==''){
-			$data = 'id';
+			$data = $field;
 		}else{
 			$data = $result;
 		}
 		return $data;		
 	}
-	public function get_order_type(){
+	public function get_order_type($id = 'desc'){
 		$result = $this->ci->input->get('order_type');
 		if($result==''){
-			$data = 'desc';
+			$data = $id;
 		}else{
 			$data = $result;
 		}
