@@ -30,7 +30,8 @@
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='kendaraan'?'active':"")?>"><?=anchor('kendaraan','<span class="glyphicon glyphicon-bed"></span> Kendaraan')?></li>
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='komponen'?'active':"")?>"><?=anchor('komponen','<span class="glyphicon glyphicon-cog"></span> Komponen')?></li>
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='servis'?'active':"")?>"><?=anchor('servis','<span class="glyphicon glyphicon-edit"></span> Servis')?></li>
-					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='servis_rekap'?'active':"")?>"><?=anchor('servis_rekap','<span class="glyphicon glyphicon-print"></span> Rekap Servis')?></li>
+					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='servis_rekap'?'active':"")?>"><?=anchor('servis_rekap','<span class="glyphicon glyphicon-th-list"></span> Rekap Servis')?></li>
+					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='home'?'active':"")?>"><?=anchor('home','<span class="glyphicon glyphicon-calendar"></span> Reminder')?></li>
 				</ul>		
 				<div class="navbar-right">		
 					<ul class="nav navbar-nav">

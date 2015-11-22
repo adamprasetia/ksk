@@ -25,9 +25,7 @@
 		<?=form_close()?>
 		<?=form_open($action_delete,array('class'=>'form-check-delete'))?>
 		<div class="table-responsive">
-			<table class="table">
-				<?=$table?>
-			</table>
+			<?=$table?>
 		</div>
 		<?=form_close()?>
 	</div>
