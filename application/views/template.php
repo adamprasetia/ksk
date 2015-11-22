@@ -31,13 +31,12 @@
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='komponen'?'active':"")?>"><?=anchor('komponen','<span class="glyphicon glyphicon-cog"></span> Komponen')?></li>
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='servis'?'active':"")?>"><?=anchor('servis','<span class="glyphicon glyphicon-edit"></span> Servis')?></li>
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='servis_rekap'?'active':"")?>"><?=anchor('servis_rekap','<span class="glyphicon glyphicon-th-list"></span> Rekap Servis')?></li>
-					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='home'?'active':"")?>"><?=anchor('home','<span class="glyphicon glyphicon-calendar"></span> Reminder')?></li>
 				</ul>		
 				<div class="navbar-right">		
 					<ul class="nav navbar-nav">
 						<li><a href="#"><?=$this->general_lib->get_username()?></a></li>
-						<li><?=anchor('login/change_password','Change Password')?></li>
-						<li><?=anchor('login/logout','Logout')?></li>
+						<li><?=anchor('home/change_password','Change Password')?></li>
+						<li><?=anchor('home/logout','Logout')?></li>
 					</ul>
 				</div>
 			</div>			

@@ -90,10 +90,19 @@ class Servis_rekap extends MY_Controller {
 		$pdf->Ln(5);
 		$pdf->setX(30);
 		$pdf->Cell(0,5,'DINAS KEBERSIHAN DAN PERTAMANAN',0,0,'L');
+		$pdf->SetFont('Arial','',8);
+		if($this->input->get('date_from')<>'' && $this->input->get('date_to')<>''){
+			$pdf->Ln(5);
+			$pdf->setX(30);
+			$pdf->Cell(0,5,'Periode : '.$this->input->get('date_from').' s/d '.$this->input->get('date_to'),0,0,'L');
+		}
+		if($this->input->get('kendaraan')<>''){
+			$pdf->Ln(5);
+			$pdf->setX(30);
+			$pdf->Cell(0,5,'Nomor Polisi : '.$this->general_mdl->get_from_field('kendaraan','id',$this->input->get('kendaraan'))->row()->nopol,0,0,'L');
+		}
 		$pdf->Ln(5);
-		$pdf->setX(30);
-		$pdf->Cell(0,5,'Periode : '.$this->input->get('date_from').' s/d '.$this->input->get('date_to'),0,0,'L');
-		$pdf->Ln(5);
+		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(0,5,'REKAPITULASI SERVIS',0,0,'C');
 		$pdf->Ln(10);
 		$pdf->SetFont('Arial','B',8);

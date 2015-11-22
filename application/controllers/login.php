@@ -41,18 +41,4 @@ class Login extends CI_Controller {
 			return false;		
 		}
 	}
-	public function logout(){
-		$this->session->unset_userdata('user_login');
-		$this->session->unset_userdata('user_level');
-		redirect('login');
-	}
-	public function change_password(){
-		$this->form_validation->set_rules('new_pass','New Password','required|trim');
-		$this->form_validation->set_rules('con_pass','Confirm Password','required|trim|matches[new_pass]');
-		if($this->form_validation->run()===false){
-			
-		}else{
-
-		}
-	}
 }

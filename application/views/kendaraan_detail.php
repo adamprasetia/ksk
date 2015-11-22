@@ -5,7 +5,7 @@
 </ol>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		Kendaraan Detail	
+		Detail	
 	</div>	
 	<div class="panel-body">
 		<div class="form-group form-inline">
@@ -24,11 +24,21 @@
 			<?=form_label('Nomor Chassis','',array('class'=>'control-label'))?>
 			:&nbsp;&nbsp;<?=$kendaraan->nocha?>
 		</div>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Status
+	</div>	
+	<div class="panel-body">
 		<div class="form-group form-inline">
-			<?=form_label('Status Kendaraan','',array('class'=>'control-label'))?>
+			<?=form_label('Oli Mesin','',array('class'=>'control-label'))?>
+			:&nbsp;&nbsp;<?=olie_mesin_status(timeago(strtotime($this->reminder_mdl->oli_mesin($kendaraan->id)->row()->tanggal)))?>
+		</div>
+		<div class="form-group form-inline">
+			<?=form_label('Tunup','',array('class'=>'control-label'))?>
 			:&nbsp;&nbsp;<?=''?>
 		</div>
-		<small>*) Note : Ganti olie sebulan sekali disebut mobil sehat 100%, Di ganti dibawah 9kalidalam setaun kurang sehat 50% WARNING</small>
 	</div>
 </div>
 <div class="panel panel-default">

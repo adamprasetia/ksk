@@ -4,6 +4,8 @@ class Kendaraan extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('kendaraan_mdl');
+		$this->load->model('reminder_mdl');
+		$this->load->helper('reminder');
 	}
 	public function index(){
 		$offset = $this->general_lib->get_offset();
