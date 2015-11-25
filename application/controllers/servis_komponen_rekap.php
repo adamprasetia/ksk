@@ -17,7 +17,6 @@ class Servis_komponen_rekap extends MY_Controller {
 			$head_data = array(
 				'komponen_nama'=>'Komponen',
 				'satuan'=>'Satuan',
-				'harga'=>'Harga Satuan',
 				'total'=>'Total Harga'
 			);
 			$heading[] = 'No';
@@ -32,7 +31,6 @@ class Servis_komponen_rekap extends MY_Controller {
 					$i++,
 					($r->komponen_lain<>''?$r->komponen_lain:$r->komponen_nama),
 					array('data'=>number_format($r->satuan).'&nbsp;'.$r->komponen_satuan_nama,'align'=>'right'),
-					array('data'=>number_format($r->harga),'align'=>'right'),
 					array('data'=>number_format($r->total),'align'=>'right')
 				);
 			}
@@ -97,9 +95,8 @@ class Servis_komponen_rekap extends MY_Controller {
 		$pdf->Ln(10);
 		$pdf->SetFont('Arial','B',8);
 		$pdf->Cell(10,5,'NO',1,0,'C');
-		$pdf->Cell(80,5,'KOMPONEN',1,0,'C');
+		$pdf->Cell(110,5,'KOMPONEN',1,0,'C');
 		$pdf->Cell(30,5,'SATUAN',1,0,'C');
-		$pdf->Cell(30,5,'HARGA SATUAN',1,0,'C');
 		$pdf->Cell(0,5,'TOTAL HARGA',1,0,'C');
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial','',8);
@@ -108,9 +105,8 @@ class Servis_komponen_rekap extends MY_Controller {
 		$total = 0;
 		foreach($result as $r){
 			$pdf->Cell(10,5,$i++,1,0,'C');
-			$pdf->Cell(80,5,($r->komponen_lain<>''?$r->komponen_lain:$r->komponen_nama),1,0,'L');
+			$pdf->Cell(110,5,($r->komponen_lain<>''?$r->komponen_lain:$r->komponen_nama),1,0,'L');
 			$pdf->Cell(30,5,number_format($r->satuan).' '.$r->komponen_satuan_nama,1,0,'R');
-			$pdf->Cell(30,5,number_format($r->harga),1,0,'R');
 			$pdf->Cell(0,5,number_format($r->total),1,0,'R');
 			$pdf->Ln(5);			
 			$total += $r->total;
