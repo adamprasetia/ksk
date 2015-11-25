@@ -29,14 +29,14 @@
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='user'?'active':"")?>"><?=anchor('user','<span class="glyphicon glyphicon-lock"></span> Security')?></li>
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='kendaraan'?'active':"")?>"><?=anchor('kendaraan','<span class="glyphicon glyphicon-bed"></span> Kendaraan')?></li>
 					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='komponen'?'active':"")?>"><?=anchor('komponen','<span class="glyphicon glyphicon-cog"></span> Komponen')?></li>
-					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='servis'?'active':"")?>"><?=anchor('servis','<span class="glyphicon glyphicon-edit"></span> Servis')?></li>
-					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='servis_rekap'?'active':"")?>"><?=anchor('servis_rekap','<span class="glyphicon glyphicon-th-list"></span> Rekap Servis')?></li>
+					<li class="<?=($this->uri->segment(1)=='servis'?'active':"")?>"><?=anchor('servis','<span class="glyphicon glyphicon-edit"></span> Servis')?></li>
+					<li class="<?=($this->uri->segment(1)=='servis_rekap'?'active':"")?>"><?=anchor('servis_rekap','<span class="glyphicon glyphicon-th-list"></span> Rekap Servis')?></li>
 				</ul>		
 				<div class="navbar-right">		
 					<ul class="nav navbar-nav">
-						<li><a href="#"><?=$this->general_lib->get_username()?></a></li>
-						<li><?=anchor('home/change_password','Change Password')?></li>
-						<li><?=anchor('home/logout','Logout')?></li>
+						<li><a href="#"><span class="glyphicon glyphicon-user"></span> <?=$this->general_lib->get_username()?></a></li>
+						<li class="<?=($this->uri->segment(2)=='change_password'?'active':"")?>"><?=anchor('home/change_password','<span class="glyphicon glyphicon-cog"></span> Change Password')?></li>
+						<li><?=anchor('home/logout','<span class="glyphicon glyphicon-log-out"></span> Logout')?></li>
 					</ul>
 				</div>
 			</div>			

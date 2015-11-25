@@ -10,11 +10,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping database structure for kartu_sehat_kendaraan
-CREATE DATABASE IF NOT EXISTS `kartu_sehat_kendaraan` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `kartu_sehat_kendaraan`;
-
-
 -- Dumping structure for table kartu_sehat_kendaraan.kendaraan
 CREATE TABLE IF NOT EXISTS `kendaraan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -33,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `kendaraan` (
 -- Dumping data for table kartu_sehat_kendaraan.kendaraan: ~3 rows (approximately)
 /*!40000 ALTER TABLE `kendaraan` DISABLE KEYS */;
 INSERT INTO `kendaraan` (`id`, `nopol`, `tipe`, `nomes`, `nocha`, `status`, `user_create`, `date_create`, `user_update`, `date_update`) VALUES
-	(1, 'F 1234 WR', 3, '2322212332', '1223321', 1, 'damz', '2015-10-31 14:34:32', 'damz', '2015-10-31 16:07:46'),
+	(1, 'F 1234 WR', 2, '2322212332', '1223321', 1, 'damz', '2015-10-31 14:34:32', 'damz', '2015-11-22 13:39:56'),
 	(2, 'F 3434 WF', 1, '3444434434', '3233233', 1, 'damz', '2015-10-31 14:36:30', 'damz', '2015-10-31 14:38:16'),
 	(3, 'F 1111 WB', 3, '2343423434', '33434234343434', 1, 'damz', '2015-11-22 09:37:24', '', '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `kendaraan` ENABLE KEYS */;
@@ -90,8 +85,8 @@ CREATE TABLE IF NOT EXISTS `komponen` (
 -- Dumping data for table kartu_sehat_kendaraan.komponen: ~27 rows (approximately)
 /*!40000 ALTER TABLE `komponen` DISABLE KEYS */;
 INSERT INTO `komponen` (`id`, `nama`, `group`, `harga`, `satuan`, `user_create`, `date_create`, `user_update`, `date_update`) VALUES
-	(1, 'Celah Katup', 1, 50000, 1, 'damz', '2015-10-31 15:17:14', 'damz', '2015-10-31 16:25:02'),
-	(2, 'Tali Kipas', 1, 23000, 1, 'damz', '2015-10-31 15:18:08', 'damz', '2015-10-31 16:25:10'),
+	(1, 'Celah Katup', 1, 0, 1, 'damz', '2015-10-31 15:17:14', 'damz', '2015-11-22 13:38:46'),
+	(2, 'Tali Kipas', 1, 0, 1, 'damz', '2015-10-31 15:18:08', 'damz', '2015-11-22 13:38:38'),
 	(3, 'Olie Mesin', 1, 0, 2, 'damz', '2015-10-31 15:18:14', 'damz', '2015-10-31 16:25:32'),
 	(4, 'Olie Gardan', 1, 0, 2, 'damz', '2015-10-31 15:18:21', 'damz', '2015-10-31 16:25:36'),
 	(5, 'Olie Transimisi', 1, 0, 2, 'damz', '2015-10-31 15:18:29', 'damz', '2015-10-31 16:25:40'),
@@ -274,13 +269,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `date_update` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- Dumping data for table kartu_sehat_kendaraan.user: ~2 rows (approximately)
+-- Dumping data for table kartu_sehat_kendaraan.user: ~3 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `fullname`, `username`, `password`, `level`, `status`, `ip_login`, `user_agent`, `date_login`, `user_create`, `date_create`, `user_update`, `date_update`) VALUES
-	(1, 'Adam Prasetia', 'damz', '123', 1, 1, '127.0.0.1', 'Windows 7(Google Chrome 46.0.2490.86)', '2015-11-22 08:32:32', '', '0000-00-00 00:00:00', 'uni', '2015-11-01 15:01:51'),
-	(35, 'Wahyuni Priska Agustin', 'uni', '123', 1, 1, '::1', 'Windows 8.1(Google Chrome 46.0.2490.80)', '2015-11-01 15:01:31', 'damz', '2015-11-01 15:01:27', '', '0000-00-00 00:00:00');
+	(1, 'Adam Prasetia', 'damz', '123', 1, 1, '127.0.0.1', 'Windows 7(Google Chrome 46.0.2490.86)', '2015-11-22 14:11:49', '', '0000-00-00 00:00:00', 'uni', '2015-11-01 15:01:51'),
+	(35, 'Wahyuni Priska Agustin', 'uni', '123', 1, 1, '::1', 'Windows 8.1(Google Chrome 46.0.2490.80)', '2015-11-01 15:01:31', 'damz', '2015-11-01 15:01:27', '', '0000-00-00 00:00:00'),
+	(36, 'adben', 'adben', '123', 2, 1, '127.0.0.1', 'Windows 7(Google Chrome 46.0.2490.86)', '2015-11-22 14:11:22', 'damz', '2015-11-22 14:11:18', '', '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 
