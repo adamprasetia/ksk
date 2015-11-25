@@ -166,13 +166,14 @@ class Kendaraan extends MY_Controller {
 
 			//servis detail
 			$this->table->set_template(tbl_tmp_servis());
-			$this->table->set_heading('No','Tanggal','Komponen Mesin','Jenis Perlakuan');
+			$this->table->set_heading('No','Tanggal','Lama','Komponen Mesin','Jenis Perlakuan');
 			$servis_history = $this->general_mdl->get_servis_history($id)->result();
 			$i=1;
 			foreach($servis_history as $r){
 				$this->table->add_row(
 					$i++,
 					format_dmy($r->tanggal),
+					timeago(strtotime($r->tanggal)),
 					($r->komponen_lain<>''?$r->komponen_lain:$r->komponen_nama),
 					$r->komponen_aksi_nama
 				);

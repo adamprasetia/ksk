@@ -3,20 +3,23 @@
 class Home extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('kendaraan_mdl');
 		$this->load->model('reminder_mdl');
 		$this->load->helper('reminder');
 	}
 	public function index(){
 		$this->table->set_template(tbl_tmp());
-		$this->table->set_heading('No','Kendaraan','Terakhir Ganti Oli Mesin','Status');
-		$result = $this->reminder_mdl->oli_mesin()->result();
+		$this->table->set_heading('No','Kendaraan','Tipe','Terakhir Ganti Oli Mesin','Status');
+		$result = $this->kendaraan_mdl->get_all()->result();
 		$i=1;
 		foreach($result as $r){
+			$terakhir_ganti_oli = $this->reminder_mdl->terakhir_ganti_oli($r->id);
 			$this->table->add_row(
 				$i++,
-				anchor('kendaraan/detail/'.$r->kendaraan_id,$r->nopol,array('target'=>'_blank')),
-				timeago(strtotime($r->tanggal)),
-				olie_mesin_status(timeago(strtotime($r->tanggal)))
+				anchor('kendaraan/detail/'.$r->id,$r->nopol,array('target'=>'_blank')),
+				$r->tipe_nama,
+				$terakhir_ganti_oli,
+				olie_mesin_status($terakhir_ganti_oli)
 			);
 		}
 		$xdata['reminder_oli_mesin'] = $this->table->generate();

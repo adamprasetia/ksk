@@ -33,7 +33,7 @@
 	<div class="panel-body">
 		<div class="form-group form-inline">
 			<?=form_label('Oli Mesin','',array('class'=>'control-label'))?>
-			:&nbsp;&nbsp;<?=olie_mesin_status(timeago(strtotime($this->reminder_mdl->oli_mesin($kendaraan->id)->row()->tanggal)))?>
+			:&nbsp;&nbsp;<?=olie_mesin_status($this->reminder_mdl->terakhir_ganti_oli($kendaraan->id))?>
 		</div>
 		<div class="form-group form-inline">
 			<?=form_label('Tunup','',array('class'=>'control-label'))?>

@@ -19,6 +19,10 @@ class Kendaraan_mdl extends CI_Model {
 		$this->db->limit($this->general_lib->get_limit());
 		return $this->db->get($this->tbl_name);
 	}
+	function get_all(){
+		$this->query();
+		return $this->db->get($this->tbl_name);
+	}
 	function add($data){
 		$this->db->insert($this->tbl_name,$data);
 	}
