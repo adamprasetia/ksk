@@ -13,7 +13,7 @@ class Home extends MY_Controller {
 		$result = $this->kendaraan_mdl->get_all()->result();
 		$i=1;
 		foreach($result as $r){
-			$terakhir_ganti_oli = $this->reminder_mdl->terakhir_ganti_oli($r->id);
+			$terakhir_ganti_oli = $this->reminder_mdl->terakhir_ganti_oli($r->kode);
 			$this->table->add_row(
 				$i++,
 				anchor('kendaraan/detail/'.$r->id,$r->nopol,array('target'=>'_blank')),

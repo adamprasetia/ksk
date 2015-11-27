@@ -19,6 +19,7 @@ class Kendaraan extends MY_Controller {
 
 		$this->table->set_template(tbl_tmp());
 		$head_data = array(
+			'kode'=>'Kode Kendaraan',
 			'nopol'=>'Nomor Polisi',
 			'tipe_nama'=>'Tipe',
 			'nomes'=>'Nomor Mesin',
@@ -38,14 +39,14 @@ class Kendaraan extends MY_Controller {
 			$this->table->add_row(
 				array('data'=>form_checkbox(array('name'=>'check[]','value'=>$r->id)),'width'=>'10px'),
 				$i++,
+				anchor('kendaraan/detail/'.$r->id.$this->_filter(),$r->kode,array('target'=>'_blank')),
 				$r->nopol,
 				$r->tipe_nama,
 				$r->nomes,
 				$r->nocha,
-				'<label class="label label-'.($r->status_nama=='On'?'success':'danger').'">'.$r->status_nama.'</label>',
+				'<label class="label label-'.($r->status_kode=='ON'?'success':'danger').'">'.$r->status_nama.'</label>',
 				anchor('kendaraan/edit/'.$r->id.$this->_filter(),'Edit')
 				."&nbsp;|&nbsp;".anchor('kendaraan/delete/'.$r->id.$this->_filter(),'Delete',array('onclick'=>"return confirm('you sure')"))
-				."&nbsp;|&nbsp;".anchor('kendaraan/detail/'.$r->id.$this->_filter(),'Detail')
 			);
 		}
 		$xdata['table'] = $this->table->generate();
@@ -91,6 +92,7 @@ class Kendaraan extends MY_Controller {
 	}	
 	private function _field(){
 		$data = array(
+			'kode'=>$this->input->post('kode'),
 			'nopol'=>$this->input->post('nopol'),
 			'tipe'=>$this->input->post('tipe'),
 			'nomes'=>$this->input->post('nomes'),
@@ -100,6 +102,7 @@ class Kendaraan extends MY_Controller {
 		return $data;		
 	}
 	private function _set_rules(){
+		$this->form_validation->set_rules('kode','Kode Kendaraan','required|trim');
 		$this->form_validation->set_rules('nopol','Nomor Polisi','required|trim');
 		$this->form_validation->set_rules('tipe','Tipe','required|trim');
 		$this->form_validation->set_rules('nomes','Nomor Mesin','required|trim');
@@ -157,7 +160,7 @@ class Kendaraan extends MY_Controller {
 		redirect('kendaraan'.$this->_filter());
 	}
 	public function get_kendaraan($id){
-		$result = $this->kendaraan_mdl->get_from_field('id',$id)->row_array();
+		$result = $this->kendaraan_mdl->get_from_field('kode',$id)->row_array();
 		echo json_encode($result);
 	}
 	public function detail($id){
@@ -175,7 +178,7 @@ class Kendaraan extends MY_Controller {
 					format_dmy($r->tanggal),
 					timeago(strtotime($r->tanggal)),
 					($r->komponen_lain<>''?$r->komponen_lain:$r->komponen_nama),
-					$r->komponen_aksi_nama
+					$r->servis_aksi_nama
 				);
 			}
 			$xdata['servis_history'] = $this->table->generate();

@@ -1,20 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Kendaraan_mdl extends CI_Model {
-	private $tbl_name = 'kendaraan';
+class Master_mdl extends CI_Model {
+	private $tbl_name;
 	private $tbl_key = 'id';
+	function __construct(){
+		$this->tbl_name = $this->uri->segment(2);
+	}
 	function query(){
-		$data[] = $this->db->select(array(
-			'kendaraan.*',
-			'kendaraan_tipe.nama as tipe_nama',
-			'kendaraan_status.kode as status_kode',
-			'kendaraan_status.nama as status_nama'
-		));
-		$data[] = $this->db->join('kendaraan_tipe','kendaraan.tipe=kendaraan_tipe.kode','left');
-		$data[] = $this->db->join('kendaraan_status','kendaraan.status=kendaraan_status.kode','left');
 		$data[] = $this->search();
-		$data[] = $this->where('tipe');
-		$data[] = $this->where('status');
 		$data[] = $this->db->order_by($this->general_lib->get_order_column(),$this->general_lib->get_order_type());
 		$data[] = $this->db->offset($this->general_lib->get_offset());
 		return $data;
@@ -51,37 +44,15 @@ class Kendaraan_mdl extends CI_Model {
 	function search(){
 		$result = $this->input->get('search');
 		if($result <> ''){
-			return $this->db->where('(kode like "%'.$result.'%" or nopol like "%'.$result.'%" or nomes like "%'.$result.'%" or nocha like "%'.$result.'%")');
+			return $this->db->where('(kode like "%'.$result.'%" or nama like "%'.$result.'%")');
 		}		
-	}
-	function where($field){
-		$result = $this->input->get($field);
-		if($result <> ''){
-			return $this->db->where($field,$result);
-		}		
-	}
+	}		
 	function dropdown(){
 		$result = $this->db->get($this->tbl_name)->result();
-		$data[''] = '- Kendaraan -';
-		foreach($result as $r){
-			$data[$r->kode] = $r->nopol;
-		}
-		return $data;
-	}	
-	function dropdown_tipe(){
-		$result = $this->db->get('kendaraan_tipe')->result();
 		$data[''] = '- Tipe -';
 		foreach($result as $r){
 			$data[$r->kode] = $r->nama;
 		}
 		return $data;
-	}	
-	function dropdown_status(){
-		$result = $this->db->get('kendaraan_status')->result();
-		$data[''] = '- Status -';
-		foreach($result as $r){
-			$data[$r->kode] = $r->nama;
-		}
-		return $data;
-	}	
+	}		
 }

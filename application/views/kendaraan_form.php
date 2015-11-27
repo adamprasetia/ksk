@@ -14,13 +14,18 @@
 	</div>
 	<div class="panel-body">
 		<div class="form-group form-inline">
+			<?=form_label('Kode Kendaraan','kode',array('class'=>'control-label'))?>
+			<?=form_input(array('name'=>'kode','class'=>'form-control input-sm','maxlength'=>'50','autocomplete'=>'off','value'=>set_value('kode',(isset($row->kode)?$row->kode:'')),'required'=>'required','autofocus'=>'autofocus'))?>
+			<small><?=form_error('kode')?></small>
+		</div>
+		<div class="form-group form-inline">
 			<?=form_label('Nomor Polisi','nopol',array('class'=>'control-label'))?>
-			<?=form_input(array('name'=>'nopol','class'=>'form-control input-sm','maxlength'=>'50','autocomplete'=>'off','value'=>set_value('nopol',(isset($row->nopol)?$row->nopol:'')),'required'=>'required','autofocus'=>'autofocus'))?>
+			<?=form_input(array('name'=>'nopol','class'=>'form-control input-sm','maxlength'=>'50','autocomplete'=>'off','value'=>set_value('nopol',(isset($row->nopol)?$row->nopol:'')),'required'=>'required'))?>
 			<small><?=form_error('nopol')?></small>
 		</div>
 		<div class="form-group form-inline">
 			<?=form_label('Tipe Kendaraan','tipe',array('class'=>'control-label'))?>
-			<?=form_dropdown('tipe',$this->kendaraan_mdl->kendaraan_tipe_dropdown(),set_value('tipe',(isset($row->tipe)?$row->tipe:'')),'required=required class="form-control input-sm"')?>
+			<?=form_dropdown('tipe',$this->kendaraan_mdl->dropdown_tipe(),set_value('tipe',(isset($row->tipe)?$row->tipe:'')),'required=required class="form-control input-sm"')?>
 			<small><?=form_error('tipe')?></small>
 		</div>
 		<div class="form-group form-inline">
@@ -35,7 +40,7 @@
 		</div>
 		<div class="form-group form-inline">
 			<?=form_label('Status','status',array('class'=>'control-label'))?>
-			<?=form_dropdown('status',$this->kendaraan_mdl->kendaraan_status_dropdown(),set_value('status',(isset($row->status)?$row->status:'')),'required=required class="form-control input-sm"')?>
+			<?=form_dropdown('status',$this->kendaraan_mdl->dropdown_status(),set_value('status',(isset($row->status)?$row->status:'')),'required=required class="form-control input-sm"')?>
 			<small><?=form_error('status')?></small>
 		</div>
 	</div>

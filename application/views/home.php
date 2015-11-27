@@ -8,6 +8,7 @@
 		</div>	
 		<p>Keterangan :</p>
 		<ul>
+			<li><label class="label label-primary">undefined</label> : Belum Pernah Ganti Oli</li>	
 			<li><label class="label label-success">sehat</label> : Ganti olie sebulan sekali</li>	
 			<li><label class="label label-warning">warning</label> : Telat ganti olie 1 bulan</li>	
 			<li><label class="label label-danger">danger</label> : Telat ganti olie lebih dari 4 bulan</li>	

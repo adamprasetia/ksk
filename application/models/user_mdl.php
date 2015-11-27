@@ -5,9 +5,14 @@ class User_mdl extends CI_Model {
 	private $tbl_name = 'user';
 	private $tbl_key = 'id';
 	function query(){
-		$data[] = $this->db->select(array('user.*','user_level.name as level_name','user_status.name as status_name'));
-		$data[] = $this->db->join('user_level','user.level=user_level.id','left');
-		$data[] = $this->db->join('user_status','user.status=user_status.id','left');
+		$data[] = $this->db->select(array(
+			'user.*',
+			'user_level.nama as level_nama',
+			'user_status.kode as status_kode',
+			'user_status.nama as status_nama'
+		));
+		$data[] = $this->db->join('user_level','user.level=user_level.kode','left');
+		$data[] = $this->db->join('user_status','user.status=user_status.kode','left');
 		$data[] = $this->search();
 		$data[] = $this->where('level');
 		$data[] = $this->where('status');		
@@ -50,19 +55,19 @@ class User_mdl extends CI_Model {
 			return $this->db->where($field,$result);
 		}		
 	}
-	function user_level_dropdown(){
+	function dropdown_level(){
 		$result = $this->db->get('user_level')->result();
 		$data[''] = '- Level -';
 		foreach($result as $r){
-			$data[$r->id] = $r->name;
+			$data[$r->kode] = $r->nama;
 		}
 		return $data;
 	}	
-	function user_status_dropdown(){
+	function dropdown_status(){
 		$result = $this->db->get('user_status')->result();
 		$data[''] = '- Status -';
 		foreach($result as $r){
-			$data[$r->id] = $r->name;
+			$data[$r->kode] = $r->nama;
 		}
 		return $data;
 	}	

@@ -15,13 +15,13 @@ class Servis_komponen_rekap_mdl extends CI_Model {
 			'sum(servis_detail.satuan) as satuan',
 			'servis_detail.harga as harga',
 			'sum(servis_detail.satuan*servis_detail.harga) as total',
-			'komponen_aksi.nama as komponen_aksi_nama')
+			'servis_aksi.nama as servis_aksi_nama')
 		);
-		$data[] = $this->db->join('kendaraan','kendaraan.id=servis.kendaraan','left');
-		$data[] = $this->db->join('servis_tipe','servis.tipe=servis_tipe.id','left');
-		$data[] = $this->db->join('servis_detail','servis.id=servis_detail.servis','left');
-		$data[] = $this->db->join('komponen','servis_detail.komponen=komponen.id','left');
-		$data[] = $this->db->join('komponen_aksi','komponen_aksi.id=servis_detail.aksi','left');
+		$data[] = $this->db->join('kendaraan','kendaraan.kode=servis.kendaraan','left');
+		$data[] = $this->db->join('servis_tipe','servis.tipe=servis_tipe.kode','left');
+		$data[] = $this->db->join('servis_detail','servis.nomor=servis_detail.servis','left');
+		$data[] = $this->db->join('komponen','servis_detail.komponen=komponen.kode','left');
+		$data[] = $this->db->join('servis_aksi','servis_aksi.kode=servis_detail.aksi','left');
 		$data[] = $this->db->join('komponen_satuan','komponen_satuan.id=komponen.satuan','left');
 		$data[] = $this->where('kendaraan');
 		$data[] = $this->where_date('date','tanggal');

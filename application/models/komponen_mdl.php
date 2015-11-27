@@ -5,8 +5,8 @@ class Komponen_mdl extends CI_Model {
 	private $tbl_key = 'id';
 	function query(){
 		$data[] = $this->db->select(array('komponen.*','komponen_group.nama as group_nama','komponen_satuan.nama as satuan_nama'));
-		$data[] = $this->db->join('komponen_group','komponen.group=komponen_group.id','left');
-		$data[] = $this->db->join('komponen_satuan','komponen.satuan=komponen_satuan.id','left');
+		$data[] = $this->db->join('komponen_group','komponen.group=komponen_group.kode','left');
+		$data[] = $this->db->join('komponen_satuan','komponen.satuan=komponen_satuan.kode','left');
 		$data[] = $this->search();
 		$data[] = $this->where('group');
 		$data[] = $this->where('satuan');
@@ -50,7 +50,7 @@ class Komponen_mdl extends CI_Model {
 			return $this->db->where($field,$result);
 		}		
 	}
-	function get_komponen_dropdown($group){
+	/*function get_komponen_dropdown($group){
 		$this->db->where('group',$group);
 		$result = $this->db->get('komponen')->result();
 		foreach($result as $r){
@@ -68,29 +68,30 @@ class Komponen_mdl extends CI_Model {
 			$data[$r->group_nama] = $this->get_komponen_dropdown($r->group);
 		}
 		return $data;
-	}			
-	function komponen_group_dropdown(){
+	}*/
+	function dropdown(){
+		$result = $this->db->get($this->tbl_name)->result();
+		$data[''] = '- Komponen -';
+		foreach($result as $r){
+			$data[$r->kode] = $r->nama;
+		}
+		return $data;
+	}		
+	function dropdown_group(){
 		$result = $this->db->get('komponen_group')->result();
 		$data[''] = '- Group -';
 		foreach($result as $r){
-			$data[$r->id] = $r->nama;
+			$data[$r->kode] = $r->nama;
 		}
 		return $data;
-	}			
-	function komponen_satuan_dropdown(){
+	}		
+	function dropdown_satuan(){
 		$result = $this->db->get('komponen_satuan')->result();
 		$data[''] = '- Satuan -';
 		foreach($result as $r){
-			$data[$r->id] = $r->nama;
+			$data[$r->kode] = $r->nama;
 		}
 		return $data;
-	}			
-	function komponen_aksi_dropdown(){
-		$result = $this->db->get('komponen_aksi')->result();
-		$data[''] = '- Aksi -';
-		foreach($result as $r){
-			$data[$r->id] = $r->nama;
-		}
-		return $data;
-	}			
+	}		
+
 }

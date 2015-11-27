@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +19,7 @@
 	  ga('create', 'UA-70699667-1', 'auto');
 	  ga('send', 'pageview');
 
-	</script>	
+	</script>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -36,12 +35,53 @@
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='user'?'active':"")?>"><?=anchor('user','<span class="glyphicon glyphicon-lock"></span> Security')?></li>
-					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='kendaraan'?'active':"")?>"><?=anchor('kendaraan','<span class="glyphicon glyphicon-bed"></span> Kendaraan')?></li>
-					<li class="<?=($this->session->userdata('user_level')<>1?"hide":"")?><?=($this->uri->segment(1)=='komponen'?'active':"")?>"><?=anchor('komponen','<span class="glyphicon glyphicon-cog"></span> Komponen')?></li>
-					<li class="<?=($this->uri->segment(1)=='servis'?'active':"")?>"><?=anchor('servis','<span class="glyphicon glyphicon-edit"></span> Servis')?></li>
-					<li class="<?=($this->uri->segment(1)=='servis_rekap'?'active':"")?>"><?=anchor('servis_rekap','<span class="glyphicon glyphicon-th-list"></span> Rekap Servis')?></li>
-					<li class="<?=($this->uri->segment(1)=='servis_komponen_rekap'?'active':"")?>"><?=anchor('servis_komponen_rekap','<span class="glyphicon glyphicon-th-list"></span> Rekap Servis Komponen')?></li>
+					<li class="dropdown <?=($this->uri->segment(1)=='master'?'active':"")?> <?=($this->session->userdata('user_level')<>'ABK'?"hide":"")?>">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-hdd"></span> Master Data <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+							<li class="<?=($this->uri->segment(2)=='kendaraan_tipe'?'active':"")?>"><?=anchor('master/kendaraan_tipe','<span class="glyphicon glyphicon-bed"></span> Tipe Kendaraan')?></li>
+							<li class="<?=($this->uri->segment(2)=='kendaraan_status'?'active':"")?>"><?=anchor('master/kendaraan_status','<span class="glyphicon glyphicon-bed"></span> Status Kendaraan')?></li>
+							<li role="separator" class="divider"></li>
+							<li class="<?=($this->uri->segment(2)=='komponen_group'?'active':"")?>"><?=anchor('master/komponen_group','<span class="glyphicon glyphicon-cog"></span> Group Komponen')?></li>
+							<li class="<?=($this->uri->segment(2)=='komponen_satuan'?'active':"")?>"><?=anchor('master/komponen_satuan','<span class="glyphicon glyphicon-cog"></span> Satuan Komponen')?></li>
+							<li role="separator" class="divider"></li>
+							<li class="<?=($this->uri->segment(2)=='servis_tipe'?'active':"")?>"><?=anchor('master/servis_tipe','<span class="glyphicon glyphicon-edit"></span> Servis Tipe')?></li>
+							<li class="<?=($this->uri->segment(2)=='servis_aksi'?'active':"")?>"><?=anchor('master/servis_aksi','<span class="glyphicon glyphicon-edit"></span> Servis Aksi')?></li>
+							<li role="separator" class="divider"></li>
+							<li class="<?=($this->uri->segment(2)=='user_level'?'active':"")?>"><?=anchor('master/user_level','<span class="glyphicon glyphicon-user"></span> User Level')?></li>
+							<li class="<?=($this->uri->segment(2)=='user_status'?'active':"")?>"><?=anchor('master/user_status','<span class="glyphicon glyphicon-user"></span> User Status')?></li>
+	          </ul>
+        	</li>					
+					<li class="dropdown <?=($this->session->userdata('user_level')<>'ABK'?"hide":"")?>">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+							<li><?=anchor('user/add','<span class="glyphicon glyphicon-user"></span> Tambah User')?></li>
+							<li><?=anchor('user','<span class="glyphicon glyphicon-user"></span> List User')?></li>
+	          </ul>
+        	</li>					
+					<li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bed"></span> Kendaraan <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+							<li><?=anchor('kendaraan/add','<span class="glyphicon glyphicon-bed"></span> Tambah Kendaraan')?></li>
+							<li><?=anchor('kendaraan','<span class="glyphicon glyphicon-bed"></span> List Kendaraan')?></li>
+	          </ul>
+        	</li>					
+					<li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> Komponen <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+							<li><?=anchor('komponen/add','<span class="glyphicon glyphicon-cog"></span> Tambah Komponen')?></li>
+							<li><?=anchor('komponen','<span class="glyphicon glyphicon-cog"></span> List Komponen')?></li>
+	          </ul>
+        	</li>					
+					<li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-edit"></span> Servis <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+							<li><?=anchor('servis/add','<span class="glyphicon glyphicon-edit"></span> Tambah Servis')?></li>
+							<li><?=anchor('servis','<span class="glyphicon glyphicon-edit"></span> List Servis')?></li>
+							<li role="separator" class="divider"></li>
+							<li><?=anchor('servis_rekap','<span class="glyphicon glyphicon-th-list"></span> Rekap Servis')?></li>
+							<li><?=anchor('servis_komponen_rekap','<span class="glyphicon glyphicon-th-list"></span> Rekap Servis Komponen')?></li>
+	          </ul>
+        	</li>					
 				</ul>		
 				<div class="navbar-right">		
 					<ul class="nav navbar-nav">

@@ -30,12 +30,12 @@
 		</div>
 		<div class="form-group form-inline">
 			<?=form_label('Level','level',array('class'=>'control-label'))?>
-			<?=form_dropdown('level',$this->user_mdl->user_level_dropdown(),set_value('level',(isset($row->level)?$row->level:'')),'required=required class="form-control input-sm"')?>
+			<?=form_dropdown('level',$this->user_mdl->dropdown_level(),set_value('level',(isset($row->level)?$row->level:'')),'required=required class="form-control input-sm"')?>
 			<small><?=form_error('level')?></small>
 		</div>
 		<div class="form-group form-inline">
 			<?=form_label('Status','status',array('class'=>'control-label'))?>
-			<?=form_dropdown('status',$this->user_mdl->user_status_dropdown(),set_value('status',(isset($row->status)?$row->status:'')),'required=required class="form-control input-sm"')?>
+			<?=form_dropdown('status',$this->user_mdl->dropdown_status(),set_value('status',(isset($row->status)?$row->status:'')),'required=required class="form-control input-sm"')?>
 			<small><?=form_error('status')?></small>
 		</div>
 	</div>

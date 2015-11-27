@@ -87,7 +87,7 @@ class Servis_komponen_rekap extends MY_Controller {
 		if($this->input->get('kendaraan')<>''){
 			$pdf->Ln(5);
 			$pdf->setX(30);
-			$pdf->Cell(0,5,'Nomor Polisi : '.$this->general_mdl->get_from_field('kendaraan','id',$this->input->get('kendaraan'))->row()->nopol,0,0,'L');
+			$pdf->Cell(0,5,'Nomor Polisi : '.$this->general_mdl->get_from_field('kendaraan','kode',$this->input->get('kendaraan'))->row()->nopol,0,0,'L');
 		}
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial','B',10);

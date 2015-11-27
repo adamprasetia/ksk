@@ -38,8 +38,15 @@
 |
 */
 
-$route['default_controller'] = "home";
-$route['404_override'] = '';
+$route['default_controller'] 					= "home";
+$route['404_override'] 								= '';
+
+$route['master/(:any)/search'] 				= 'master/search';
+$route['master/(:any)/add'] 					= 'master/add';
+$route['master/(:any)/edit/(:num)'] 	= 'master/edit/$2';
+$route['master/(:any)/delete/(:num)']	= 'master/delete/$2';
+$route['master/(:any)/delete']				= 'master/delete';
+$route['master/(:any)'] 							= 'master/index';
 
 
 /* End of file routes.php */

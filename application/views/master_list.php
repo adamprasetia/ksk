@@ -4,7 +4,7 @@
 		<?=$delete_btn?>
 		<ol class="breadcrumb pull-right">
 			<li><?=anchor('home','<span class="glyphicon glyphicon-home"></span> Home')?></li>
-			<li class="active">Komponen</li>
+			<li class="active">Master Data</li>
 		</ol>
 	</div>
 	<div class="panel-body">
@@ -16,18 +16,10 @@
 			<div class="form-group">
 				<?=form_input(array('name'=>'search','value'=>$this->input->get('search'),'autocomplete'=>'off','placeholder'=>'Search..','onchange=>"submit()"','class'=>'form-control input-sm'))?>
 			</div>
-			<div class="form-group">
-				<?=form_dropdown('group',$this->komponen_mdl->dropdown_group(),$this->input->get('group'),'class="form-control input-sm" onchange="submit()"')?>
-			</div>
-			<div class="form-group">
-				<?=form_dropdown('satuan',$this->komponen_mdl->dropdown_satuan(),$this->input->get('satuan'),'class="form-control input-sm" onchange="submit()"')?>
-			</div>
 		<?=form_close()?>
 		<?=form_open($action_delete,array('class'=>'form-check-delete'))?>
 		<div class="table-responsive">
-			<table class="table">
-				<?=$table?>
-			</table>
+			<?=$table?>
 		</div>
 		<?=form_close()?>
 	</div>

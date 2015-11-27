@@ -106,9 +106,9 @@ class Servis extends MY_Controller {
 	}
 	private function _field_servis_detail($r=''){
 		$data = array(
-			form_dropdown('komponen[]',$this->komponen_mdl->komponen_dropdown(),set_value('komponen[]',(isset($r->komponen)?$r->komponen:'')),'required=required class="form-control input-sm"').
+			form_dropdown('komponen[]',$this->komponen_mdl->dropdown(),set_value('komponen[]',(isset($r->komponen)?$r->komponen:'')),'required=required class="form-control input-sm"').
 			form_input(array('name'=>'komponen_lain[]','placeholder'=>'Komponen lain','class'=>'form-control input-sm komponen-lain '.(isset($r->komponen_lain) && $r->komponen_lain<>''?'':'hide'),'maxlength'=>'60','autocomplete'=>'off','value'=>set_value('komponen_lain[]',(isset($r->komponen_lain)?$r->komponen_lain:'')))),
-			form_dropdown('aksi[]',$this->komponen_mdl->komponen_aksi_dropdown(),set_value('aksi[]',(isset($r->aksi)?$r->aksi:'')),'required=required class="form-control input-sm"'),
+			form_dropdown('aksi[]',$this->servis_mdl->dropdown_aksi(),set_value('aksi[]',(isset($r->aksi)?$r->aksi:'')),'required=required class="form-control input-sm"'),
 			form_input(array('name'=>'satuan[]','class'=>'form-control input-sm input-uang text-right','maxlength'=>'50','autocomplete'=>'off','value'=>set_value('satuan[]',(isset($r->satuan)?$r->satuan:'')),'required'=>'required')),
 			form_input(array('name'=>'harga[]','class'=>'form-control input-sm input-uang text-right','maxlength'=>'50','autocomplete'=>'off','value'=>set_value('harga[]',(isset($r->harga)?$r->harga:'')),'required'=>'required')),
 			form_input(array('name'=>'total_harga[]','class'=>'form-control input-sm input-uang text-right','maxlength'=>'50','autocomplete'=>'off','value'=>set_value('total_harga[]',(isset($r->harga) && isset($r->satuan)?$r->harga*$r->satuan:'')),'readonly'=>'readonly')),
@@ -143,7 +143,8 @@ class Servis extends MY_Controller {
 			$data['user_create'] = $this->session->userdata('user_login');
 			$data['date_create'] = date('Y-m-d H:i:s');
 			$id = $this->servis_mdl->add($data);
-			$this->_add_servis_detail($id);
+			$nomor = $this->servis_mdl->get_from_field('id',$id)->row()->nomor;
+			$this->_add_servis_detail($nomor);
 			$this->session->set_flashdata('alert','<div class="alert alert-success">Tambah Data Sukses</div>');
 			redirect('servis/add'.$this->_filter());
 		}
@@ -159,7 +160,8 @@ class Servis extends MY_Controller {
 
 			$this->table->set_template(tbl_tmp_servis());
 			$this->table->set_heading('Komponen Mesin','Jenis Perlakuan','Satuan','Harga Satuan','Total Harga','Action');
-			$servis_detail = $this->general_mdl->get_from_field('servis_detail','servis',$id);
+			$nomor = $this->servis_mdl->get_from_field('id',$id)->row()->nomor;
+			$servis_detail = $this->general_mdl->get_from_field('servis_detail','servis',$nomor);
 			if($servis_detail->num_rows()>0){
 				foreach($servis_detail->result() as $r){
 					$this->table->add_row($this->_field_servis_detail($r));
@@ -175,8 +177,9 @@ class Servis extends MY_Controller {
 			$data['user_update'] = $this->session->userdata('user_login');
 			$data['date_update'] = date('Y-m-d H:i:s');
 			$this->servis_mdl->edit($id,$data);
-			$this->servis_detail_mdl->delete_from_field('servis',$id);
-			$this->_add_servis_detail($id);
+			$nomor = $this->servis_mdl->get_from_field('id',$id)->row()->nomor;
+			$this->servis_detail_mdl->delete_from_field('servis',$nomor);
+			$this->_add_servis_detail($nomor);
 			$this->session->set_flashdata('alert','<div class="alert alert-success">Edit Data Sukses</div>');
 			redirect('servis/edit/'.$id.$this->_filter());
 		}
@@ -221,9 +224,9 @@ class Servis extends MY_Controller {
 	}
 	public function print_detail($id=''){	
 		$servis = $this->general_mdl->get_from_field('servis','id',$id)->row();
-		$servis_tipe = $this->general_mdl->get_from_field('servis_tipe','id',$servis->tipe)->row();
-		$kendaraan = $this->general_mdl->get_from_field('kendaraan','id',$servis->kendaraan)->row();
-		$kendaraan_tipe = $this->general_mdl->get_from_field('kendaraan_tipe','id',$kendaraan->tipe)->row();
+		$servis_tipe = $this->general_mdl->get_from_field('servis_tipe','kode',$servis->tipe)->row();
+		$kendaraan = $this->general_mdl->get_from_field('kendaraan','kode',$servis->kendaraan)->row();
+		$kendaraan_tipe = $this->general_mdl->get_from_field('kendaraan_tipe','kode',$kendaraan->tipe)->row();
 		require_once "./assets/lib/fpdf/fpdf.php";
 		$pdf = new FPDF();
 		$pdf->AliasNbPages();
@@ -284,12 +287,12 @@ class Servis extends MY_Controller {
 		$pdf->Cell(0,5,'TOTAL HARGA',1,0,'C');
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial','',8);
-		$result = $this->general_mdl->get_from_field('servis_detail','servis',$servis->id)->result();
+		$result = $this->general_mdl->get_from_field('servis_detail','servis',$servis->nomor)->result();
 		$total = 0;
 		foreach($result as $r){
-			$komponen = $this->general_mdl->get_from_field('komponen','id',$r->komponen)->row();
-			$komponen_satuan = $this->general_mdl->get_from_field('komponen_satuan','id',$komponen->satuan)->row();
-			$aksi = $this->general_mdl->get_from_field('komponen_aksi','id',$r->aksi)->row();
+			$komponen = $this->general_mdl->get_from_field('komponen','kode',$r->komponen)->row();
+			$komponen_satuan = $this->general_mdl->get_from_field('komponen_satuan','kode',$komponen->satuan)->row();
+			$aksi = $this->general_mdl->get_from_field('servis_aksi','kode',$r->aksi)->row();
 			$pdf->Cell(70,5,$komponen->nama.' '.($r->komponen_lain<>''?':'.$r->komponen_lain:''),1,0,'L');
 			$pdf->Cell(30,5,$aksi->nama,1,0,'C');
 			$pdf->Cell(30,5,number_format($r->satuan).' '.$komponen_satuan->nama,1,0,'R');

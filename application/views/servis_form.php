@@ -27,7 +27,7 @@
 				</div>
 				<div class="form-group form-inline">
 					<?=form_label('Tipe','tipe',array('class'=>'control-label'))?>
-					<?=form_dropdown('tipe',$this->servis_mdl->servis_tipe_dropdown(),set_value('tipe',(isset($row->tipe)?$row->tipe:'')),'required=required class="form-control input-sm"')?>
+					<?=form_dropdown('tipe',$this->servis_mdl->dropdown_tipe(),set_value('tipe',(isset($row->tipe)?$row->tipe:'')),'required=required class="form-control input-sm"')?>
 					<small><?=form_error('tipe')?></small>
 				</div>
 				<div class="form-group form-inline">
@@ -39,20 +39,20 @@
 			<div class="col-md-6">	
 				<div class="form-group form-inline">
 					<?=form_label('Kendaraan','kendaraan',array('class'=>'control-label'))?>
-					<?=form_dropdown('kendaraan',$this->kendaraan_mdl->kendaraan_dropdown(),set_value('kendaraan',(isset($row->kendaraan)?$row->kendaraan:'')),'required=required class="form-control input-sm" id="kendaraan"')?>
+					<?=form_dropdown('kendaraan',$this->kendaraan_mdl->dropdown(),set_value('kendaraan',(isset($row->kendaraan)?$row->kendaraan:'')),'required=required class="form-control input-sm" id="kendaraan"')?>
 					<small><?=form_error('kendaraan')?></small>
 				</div>
 				<div class="form-group form-inline">
 					<?=form_label('Tipe Kendaraan','tipe_kendaraan',array('class'=>'control-label'))?>
-					<?=form_dropdown('tipe_kendaraan',$this->kendaraan_mdl->kendaraan_tipe_dropdown(),set_value('tipe_kendaraan',''),'class="form-control input-sm" id="tipe_kendaraan" readonly')?>
+					<?=form_dropdown('tipe_kendaraan',$this->kendaraan_mdl->dropdown_tipe(),set_value('tipe_kendaraan',''),'class="form-control input-sm" id="tipe_kendaraan" disabled')?>
 				</div>
 				<div class="form-group form-inline">
 					<?=form_label('Nomor Mesin','nomes',array('class'=>'control-label'))?>
-					<?=form_input(array('name'=>'nomes','class'=>'form-control input-sm','maxlength'=>'50','autocomplete'=>'off','readonly'=>'readonly','id'=>'nomes','value'=>set_value('nomes','')))?>
+					<?=form_input(array('name'=>'nomes','class'=>'form-control input-sm','maxlength'=>'50','autocomplete'=>'off','disabled'=>'disabled','id'=>'nomes','value'=>set_value('nomes','')))?>
 				</div>
 				<div class="form-group form-inline">
 					<?=form_label('Nomor Chassis','nocha',array('class'=>'control-label'))?>
-					<?=form_input(array('name'=>'nocha','class'=>'form-control input-sm','maxlength'=>'50','autocomplete'=>'off','readonly'=>'readonly','id'=>'nocha','value'=>set_value('nocha','')))?>
+					<?=form_input(array('name'=>'nocha','class'=>'form-control input-sm','maxlength'=>'50','autocomplete'=>'off','disabled'=>'disabled','id'=>'nocha','value'=>set_value('nocha','')))?>
 				</div>
 			</div>
 		</div>

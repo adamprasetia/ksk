@@ -10,9 +10,9 @@ class Servis_mdl extends CI_Model {
 			'count(servis_detail.id) as jumlah_satuan',
 			'sum(servis_detail.satuan*servis_detail.harga) as total_harga'
 		));
-		$data[] = $this->db->join('servis_tipe','servis.tipe=servis_tipe.id','left');
-		$data[] = $this->db->join('kendaraan','servis.kendaraan=kendaraan.id','left');
-		$data[] = $this->db->join('servis_detail','servis.id=servis_detail.servis','left');
+		$data[] = $this->db->join('servis_tipe','servis.tipe=servis_tipe.kode','left');
+		$data[] = $this->db->join('kendaraan','servis.kendaraan=kendaraan.kode','left');
+		$data[] = $this->db->join('servis_detail','servis.nomor=servis_detail.servis','left');
 		$data[] = $this->search();
 		$data[] = $this->where('servis.tipe','tipe');
 		$data[] = $this->where('kendaraan');
@@ -62,12 +62,20 @@ class Servis_mdl extends CI_Model {
 			return $this->db->where($field,$result);
 		}		
 	}
-	function servis_tipe_dropdown(){
+	function dropdown_tipe(){
 		$result = $this->db->get('servis_tipe')->result();
 		$data[''] = '- Tipe -';
 		foreach($result as $r){
-			$data[$r->id] = $r->nama;
+			$data[$r->kode] = $r->nama;
 		}
 		return $data;
-	}			
+	}		
+	function dropdown_aksi(){
+		$result = $this->db->get('servis_aksi')->result();
+		$data[''] = '- Aksi -';
+		foreach($result as $r){
+			$data[$r->kode] = $r->nama;
+		}
+		return $data;
+	}		
 }

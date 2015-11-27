@@ -17,10 +17,10 @@
 				<?=form_input(array('name'=>'search','value'=>$this->input->get('search'),'autocomplete'=>'off','placeholder'=>'Search..','onchange=>"submit()"','class'=>'form-control input-sm'))?>
 			</div>
 			<div class="form-group">
-				<?=form_dropdown('tipe',$this->servis_mdl->servis_tipe_dropdown(),$this->input->get('tipe'),'class="form-control input-sm" onchange="submit()"')?>
+				<?=form_dropdown('tipe',$this->servis_mdl->dropdown_tipe(),$this->input->get('tipe'),'class="form-control input-sm" onchange="submit()"')?>
 			</div>
 			<div class="form-group">
-				<?=form_dropdown('kendaraan',$this->kendaraan_mdl->kendaraan_dropdown(),$this->input->get('kendaraan'),'class="form-control input-sm" onchange="submit()"')?>
+				<?=form_dropdown('kendaraan',$this->kendaraan_mdl->dropdown(),$this->input->get('kendaraan'),'class="form-control input-sm" onchange="submit()"')?>
 			</div>
 		<?=form_close()?>
 		<?=form_open($action_delete,array('class'=>'form-check-delete'))?>

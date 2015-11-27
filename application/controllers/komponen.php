@@ -17,6 +17,7 @@ class Komponen extends MY_Controller {
 
 		$this->table->set_template(tbl_tmp());
 		$head_data = array(
+			'kode'=>'Kode',
 			'nama'=>'Nama',
 			'group_nama'=>'Group',
 			'satuan_nama'=>'Satuan',
@@ -35,6 +36,7 @@ class Komponen extends MY_Controller {
 			$this->table->add_row(
 				array('data'=>form_checkbox(array('name'=>'check[]','value'=>$r->id)),'width'=>'10px'),
 				$i++,
+				$r->kode,
 				$r->nama,
 				$r->group_nama,
 				$r->satuan_nama,
@@ -86,6 +88,7 @@ class Komponen extends MY_Controller {
 	}	
 	private function _field(){
 		$data = array(
+			'kode'=>$this->input->post('kode'),
 			'nama'=>$this->input->post('nama'),
 			'group'=>$this->input->post('group'),
 			'satuan'=>$this->input->post('satuan'),
@@ -94,6 +97,7 @@ class Komponen extends MY_Controller {
 		return $data;		
 	}
 	private function _set_rules(){
+		$this->form_validation->set_rules('kode','Kode','required|trim');
 		$this->form_validation->set_rules('nama','Nama','required|trim');
 		$this->form_validation->set_rules('group','Group','required|trim');
 		$this->form_validation->set_rules('satuan','Satuan','required|trim');

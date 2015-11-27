@@ -77,7 +77,7 @@ $(document).ready(function(){
 		});				
 	}
 	function komponen_lain(komponen){
-		if(komponen.val()==27){
+		if(komponen.val()=='KOM-27'){
 			komponen.next().removeClass('hide');
 		}else{
 			komponen.next().addClass('hide');

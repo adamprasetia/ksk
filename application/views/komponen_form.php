@@ -14,18 +14,23 @@
 	</div>
 	<div class="panel-body">
 		<div class="form-group form-inline">
+			<?=form_label('Kode','kode',array('class'=>'control-label'))?>
+			<?=form_input(array('name'=>'kode','class'=>'form-control input-sm','maxlength'=>'60','size'=>'50','autocomplete'=>'off','autofocus'=>'autofocus','value'=>set_value('kode',(isset($row->kode)?$row->kode:'')),'required'=>'required'))?>
+			<small><?=form_error('kode')?></small>
+		</div>
+		<div class="form-group form-inline">
 			<?=form_label('Nama','nama',array('class'=>'control-label'))?>
-			<?=form_input(array('name'=>'nama','class'=>'form-control input-sm','maxlength'=>'60','size'=>'50','autocomplete'=>'off','autofocus'=>'autofocus','value'=>set_value('nama',(isset($row->nama)?$row->nama:'')),'required'=>'required'))?>
+			<?=form_input(array('name'=>'nama','class'=>'form-control input-sm','maxlength'=>'60','size'=>'50','autocomplete'=>'off','value'=>set_value('nama',(isset($row->nama)?$row->nama:'')),'required'=>'required'))?>
 			<small><?=form_error('nama')?></small>
 		</div>
 		<div class="form-group form-inline">
 			<?=form_label('Group','group',array('class'=>'control-label'))?>
-			<?=form_dropdown('group',$this->komponen_mdl->komponen_group_dropdown(),set_value('group',(isset($row->group)?$row->group:'')),'required=required class="form-control input-sm"')?>
+			<?=form_dropdown('group',$this->komponen_mdl->dropdown_group(),set_value('group',(isset($row->group)?$row->group:'')),'required=required class="form-control input-sm"')?>
 			<small><?=form_error('group')?></small>
 		</div>
 		<div class="form-group form-inline">
 			<?=form_label('Satuan','satuan',array('class'=>'control-label'))?>
-			<?=form_dropdown('satuan',$this->komponen_mdl->komponen_satuan_dropdown(),set_value('satuan',(isset($row->satuan)?$row->satuan:'')),'required=required class="form-control input-sm"')?>
+			<?=form_dropdown('satuan',$this->komponen_mdl->dropdown_satuan(),set_value('satuan',(isset($row->satuan)?$row->satuan:'')),'required=required class="form-control input-sm"')?>
 			<small><?=form_error('satuan')?></small>
 		</div>
 		<div class="form-group form-inline">

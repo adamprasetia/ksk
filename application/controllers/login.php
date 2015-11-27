@@ -34,7 +34,7 @@ class Login extends CI_Controller {
 	}
 	public function _login_check(){
 		$result = $this->user_mdl->get_from_field('username',$this->input->post('username'));
-		if($result->num_rows()>0 && $result->row()->password==$this->input->post('password') && $result->row()->status==1){
+		if($result->num_rows()>0 && $result->row()->password==$this->input->post('password') && $result->row()->status=='ON'){
 			return true;
 		}else{
 			$this->form_validation->set_message('_login_check', 'Login Failed!!!');

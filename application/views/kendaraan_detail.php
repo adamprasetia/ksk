@@ -9,6 +9,10 @@
 	</div>	
 	<div class="panel-body">
 		<div class="form-group form-inline">
+			<?=form_label('Kode Kendaraan','',array('class'=>'control-label'))?>
+			:&nbsp;&nbsp;<?=$kendaraan->kode?>
+		</div>
+		<div class="form-group form-inline">
 			<?=form_label('Nomor Polisi','',array('class'=>'control-label'))?>
 			:&nbsp;&nbsp;<?=$kendaraan->nopol?>
 		</div>
@@ -33,7 +37,7 @@
 	<div class="panel-body">
 		<div class="form-group form-inline">
 			<?=form_label('Oli Mesin','',array('class'=>'control-label'))?>
-			:&nbsp;&nbsp;<?=olie_mesin_status($this->reminder_mdl->terakhir_ganti_oli($kendaraan->id))?>
+			:&nbsp;&nbsp;<?=olie_mesin_status($this->reminder_mdl->terakhir_ganti_oli($kendaraan->kode))?>
 		</div>
 		<div class="form-group form-inline">
 			<?=form_label('Tunup','',array('class'=>'control-label'))?>

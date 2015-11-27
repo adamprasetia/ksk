@@ -13,7 +13,7 @@
 			<?=form_dropdown('limit',array('10'=>'10','50'=>'50','100'=>'100'),set_value('limit',$this->input->get('limit')),'onchange="submit()" class="form-control input-sm"')?> 
 		</div>
 		<div class="form-group">
-			<?=form_dropdown('kendaraan',$this->kendaraan_mdl->kendaraan_dropdown(),set_value('kendaraan',$this->input->get('kendaraan')),'onchange="submit()" class="form-control input-sm" id="kendaraan"')?>
+			<?=form_dropdown('kendaraan',$this->kendaraan_mdl->dropdown(),set_value('kendaraan',$this->input->get('kendaraan')),'onchange="submit()" class="form-control input-sm" id="kendaraan"')?>
 		</div>
 		<div class="form-group">
 			<?=form_input(array('name'=>'date_from','class'=>'form-control input-sm input-tanggal','maxlength'=>'10','size'=>'10','autocomplete'=>'off','value'=>set_value('date_from',$this->input->get('date_from'))))?>
