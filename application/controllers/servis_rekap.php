@@ -11,7 +11,7 @@ class Servis_rekap extends MY_Controller {
 			$limit = $this->general_lib->get_limit();
 			$total = $this->servis_rekap_mdl->count_all();
 
-			$xdata['pdf_btn'] = anchor('servis_rekap/pdf'.$this->_filter(),'Export to Pdf',array('class'=>'btn btn-warning btn-sm','target'=>'_blank'));
+			$xdata['pdf_btn'] = anchor('servis_rekap/pdf'.$this->_filter(),'<span class="glyphicon glyphicon-export"></span> Export to Pdf',array('class'=>'btn btn-success btn-sm','target'=>'_blank'));
 
 			$this->table->set_template(tbl_tmp());
 			$head_data = array(

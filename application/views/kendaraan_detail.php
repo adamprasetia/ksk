@@ -41,7 +41,7 @@
 		</div>
 		<div class="form-group form-inline">
 			<?=form_label('Tunup','',array('class'=>'control-label'))?>
-			:&nbsp;&nbsp;<?=''?>
+			:&nbsp;&nbsp;<?=tunup_status($this->reminder_mdl->terakhir_tunup($kendaraan->kode))?>
 		</div>
 	</div>
 </div>

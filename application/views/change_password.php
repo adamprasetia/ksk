@@ -26,7 +26,8 @@
 		</div>
 	</div>
 	<div class="panel-footer">
-		<button class="btn btn-warning btn-sm" type="submit" onclick="return confirm('Are you sure')"><span class="glyphicon glyphicon-edit"></span> Change</button>
+		<button class="btn btn-success btn-sm" type="submit" onclick="return confirm('Are you sure')"><span class="glyphicon glyphicon-edit"></span> Change</button>
+		<?=anchor('home','<span class="glyphicon glyphicon-repeat"></span> Batal',array('class'=>'btn btn-danger btn-sm'))?>
 	</div>
 </div>
 <?=form_close()?>

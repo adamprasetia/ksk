@@ -16,8 +16,8 @@ class Master extends MY_Controller {
 
 		$xdata['action'] = $this->section_master.'/search'.$this->_filter();
 		$xdata['action_delete'] = $this->section_master.'/delete'.$this->_filter();
-		$xdata['add_btn'] = anchor($this->section_master.'/add','Tambah',array('class'=>'btn btn-warning btn-sm'));
-		$xdata['delete_btn'] = '<button id="delete-btn" class="btn btn-warning btn-sm">Delete Checked</button>';
+		$xdata['add_btn'] = anchor($this->section_master.'/add','<span class="glyphicon glyphicon-plus"></span> Tambah',array('class'=>'btn btn-success btn-sm'));
+		$xdata['delete_btn'] = '<button id="delete-btn" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Delete Checked</button>';
 
 		$this->table->set_template(tbl_tmp());
 		$head_data = array(

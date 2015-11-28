@@ -41,7 +41,7 @@
 		<input type="text" id="username" name="username" class="form-control" placeholder="Username" autocomplete="off" maxlength="20" required autofocus>
 		<label for="password" class="sr-only">Password</label>
 		<input type="password" id="password" name="password" class="form-control" placeholder="Password"  maxlength="20" required>
-		<button class="btn btn-lg btn-warning btn-block" type="submit">Login</button>
+		<button class="btn btn-lg btn-success btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Login</button>
 	<?=form_close()?>
   </div>
   <footer class="footer">

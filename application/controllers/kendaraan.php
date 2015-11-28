@@ -14,8 +14,8 @@ class Kendaraan extends MY_Controller {
 
 		$xdata['action'] = 'kendaraan/search'.$this->_filter();
 		$xdata['action_delete'] = 'kendaraan/delete'.$this->_filter();
-		$xdata['add_btn'] = anchor('kendaraan/add','Tambah',array('class'=>'btn btn-warning btn-sm'));
-		$xdata['delete_btn'] = '<button id="delete-btn" class="btn btn-warning btn-sm">Delete Checked</button>';
+		$xdata['add_btn'] = anchor('kendaraan/add','<span class="glyphicon glyphicon-plus"></span> Tambah',array('class'=>'btn btn-success btn-sm'));
+		$xdata['delete_btn'] = '<button id="delete-btn" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Delete Checked</button>';
 
 		$this->table->set_template(tbl_tmp());
 		$head_data = array(
@@ -170,7 +170,7 @@ class Kendaraan extends MY_Controller {
 			//servis detail
 			$this->table->set_template(tbl_tmp_servis());
 			$this->table->set_heading('No','Tanggal','Lama','Komponen Mesin','Jenis Perlakuan');
-			$servis_history = $this->general_mdl->get_servis_history($id)->result();
+			$servis_history = $this->general_mdl->get_servis_history($xdata['kendaraan']->kode)->result();
 			$i=1;
 			foreach($servis_history as $r){
 				$this->table->add_row(

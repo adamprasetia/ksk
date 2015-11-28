@@ -15,8 +15,8 @@ class Servis extends MY_Controller {
 
 		$xdata['action'] = 'servis/search'.$this->_filter();
 		$xdata['action_delete'] = 'servis/delete'.$this->_filter();
-		$xdata['add_btn'] = anchor('servis/add','Tambah',array('class'=>'btn btn-warning btn-sm'));
-		$xdata['delete_btn'] = '<button id="delete-btn" class="btn btn-warning btn-sm">Delete Checked</button>';
+		$xdata['add_btn'] = anchor('servis/add','<span class="glyphicon glyphicon-plus"></span> Tambah',array('class'=>'btn btn-success btn-sm'));
+		$xdata['delete_btn'] = '<button id="delete-btn" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Delete Checked</button>';
 
 		$this->table->set_template(tbl_tmp());
 		$head_data = array(
@@ -106,13 +106,13 @@ class Servis extends MY_Controller {
 	}
 	private function _field_servis_detail($r=''){
 		$data = array(
-			form_dropdown('komponen[]',$this->komponen_mdl->dropdown(),set_value('komponen[]',(isset($r->komponen)?$r->komponen:'')),'required=required class="form-control input-sm"').
+			form_dropdown('komponen[]',$this->komponen_mdl->dropdown_komponen(),set_value('komponen[]',(isset($r->komponen)?$r->komponen:'')),'required=required class="form-control input-sm"').
 			form_input(array('name'=>'komponen_lain[]','placeholder'=>'Komponen lain','class'=>'form-control input-sm komponen-lain '.(isset($r->komponen_lain) && $r->komponen_lain<>''?'':'hide'),'maxlength'=>'60','autocomplete'=>'off','value'=>set_value('komponen_lain[]',(isset($r->komponen_lain)?$r->komponen_lain:'')))),
 			form_dropdown('aksi[]',$this->servis_mdl->dropdown_aksi(),set_value('aksi[]',(isset($r->aksi)?$r->aksi:'')),'required=required class="form-control input-sm"'),
 			form_input(array('name'=>'satuan[]','class'=>'form-control input-sm input-uang text-right','maxlength'=>'50','autocomplete'=>'off','value'=>set_value('satuan[]',(isset($r->satuan)?$r->satuan:'')),'required'=>'required')),
 			form_input(array('name'=>'harga[]','class'=>'form-control input-sm input-uang text-right','maxlength'=>'50','autocomplete'=>'off','value'=>set_value('harga[]',(isset($r->harga)?$r->harga:'')),'required'=>'required')),
 			form_input(array('name'=>'total_harga[]','class'=>'form-control input-sm input-uang text-right','maxlength'=>'50','autocomplete'=>'off','value'=>set_value('total_harga[]',(isset($r->harga) && isset($r->satuan)?$r->harga*$r->satuan:'')),'readonly'=>'readonly')),
-			'<a href="javascript:void(0)" class="btn btn-warning btn-sm delete-servis">Delete</a>'
+			'<a href="javascript:void(0)" class="btn btn-danger btn-sm delete-servis"><span class="glyphicon glyphicon-trash"></span> Delete</a>'
 		);
 		return $data;
 	}

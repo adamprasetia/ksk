@@ -50,25 +50,25 @@ class Komponen_mdl extends CI_Model {
 			return $this->db->where($field,$result);
 		}		
 	}
-	/*function get_komponen_dropdown($group){
+	function get_dropdown_komponen($group){
 		$this->db->where('group',$group);
 		$result = $this->db->get('komponen')->result();
 		foreach($result as $r){
-			$data[$r->id] = $r->nama;
+			$data[$r->kode] = $r->nama;
 		}
 		return $data;
 	}
-	function komponen_dropdown(){
+	function dropdown_komponen(){
 		$this->db->select(array('komponen.group as `group`','komponen_group.nama as group_nama'));
 		$this->db->group_by('group');
-		$this->db->join('komponen_group','komponen.group=komponen_group.id','left');
+		$this->db->join('komponen_group','komponen.group=komponen_group.kode','left');
 		$result = $this->db->get('komponen')->result();
 		$data[''] = '- Komponen -';
 		foreach($result as $r){
-			$data[$r->group_nama] = $this->get_komponen_dropdown($r->group);
+			$data[$r->group_nama] = $this->get_dropdown_komponen($r->group);
 		}
 		return $data;
-	}*/
+	}
 	function dropdown(){
 		$result = $this->db->get($this->tbl_name)->result();
 		$data[''] = '- Komponen -';

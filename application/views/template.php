@@ -51,28 +51,28 @@
 							<li class="<?=($this->uri->segment(2)=='user_status'?'active':"")?>"><?=anchor('master/user_status','<span class="glyphicon glyphicon-user"></span> User Status')?></li>
 	          </ul>
         	</li>					
-					<li class="dropdown <?=($this->session->userdata('user_level')<>'ABK'?"hide":"")?>">
+					<li class="dropdown <?=($this->uri->segment(1)=='user'?'active':"")?> <?=($this->session->userdata('user_level')<>'ABK'?"hide":"")?>">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 							<li><?=anchor('user/add','<span class="glyphicon glyphicon-user"></span> Tambah User')?></li>
 							<li><?=anchor('user','<span class="glyphicon glyphicon-user"></span> List User')?></li>
 	          </ul>
         	</li>					
-					<li class="dropdown">
+					<li class="dropdown <?=($this->uri->segment(1)=='kendaraan'?'active':"")?> ">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bed"></span> Kendaraan <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 							<li><?=anchor('kendaraan/add','<span class="glyphicon glyphicon-bed"></span> Tambah Kendaraan')?></li>
 							<li><?=anchor('kendaraan','<span class="glyphicon glyphicon-bed"></span> List Kendaraan')?></li>
 	          </ul>
         	</li>					
-					<li class="dropdown">
+					<li class="dropdown <?=($this->uri->segment(1)=='komponen'?'active':"")?> ">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> Komponen <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 							<li><?=anchor('komponen/add','<span class="glyphicon glyphicon-cog"></span> Tambah Komponen')?></li>
 							<li><?=anchor('komponen','<span class="glyphicon glyphicon-cog"></span> List Komponen')?></li>
 	          </ul>
         	</li>					
-					<li class="dropdown">
+					<li class="dropdown <?=($this->uri->segment(1)=='servis'?'active':"")?> ">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-edit"></span> Servis <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
 							<li><?=anchor('servis/add','<span class="glyphicon glyphicon-edit"></span> Tambah Servis')?></li>

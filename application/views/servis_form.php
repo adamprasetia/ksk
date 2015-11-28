@@ -57,12 +57,13 @@
 			</div>
 		</div>
 		<div class="table">
-			<a id="tambah-servis" href="javascript:void(0)" class="btn btn-warning btn-xs">Tambah</a>
+			<a id="tambah-servis" href="javascript:void(0)" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-plus"></span> Tambah</a>
 			<?=$table?>
 		</div>	
 	</div>
 	<div class="panel-footer">
-		<button class="btn btn-warning btn-sm" type="submit" onclick="return confirm('Are you sure')"><span class="glyphicon glyphicon-save"></span> Save</button>
+		<button class="btn btn-success btn-sm" type="submit" onclick="return confirm('Are you sure')"><span class="glyphicon glyphicon-save"></span> Save</button>
+		<?=anchor($breadcrumb,'<span class="glyphicon glyphicon-repeat"></span> Batal',array('class'=>'btn btn-danger btn-sm'))?>
 	</div>
 </div>
 <?=form_close()?>

@@ -23,6 +23,22 @@ class Home extends MY_Controller {
 			);
 		}
 		$xdata['reminder_oli_mesin'] = $this->table->generate();
+
+		$this->table->set_heading('No','Kendaraan','Tipe','Terakhir Servis Tunup','Status');
+		$result = $this->kendaraan_mdl->get_all()->result();
+		$i=1;
+		foreach($result as $r){
+			$terakhir_tunup = $this->reminder_mdl->terakhir_tunup($r->kode);
+			$this->table->add_row(
+				$i++,
+				anchor('kendaraan/detail/'.$r->id,$r->nopol,array('target'=>'_blank')),
+				$r->tipe_nama,
+				$terakhir_tunup,
+				tunup_status($terakhir_tunup)
+			);
+		}
+		$xdata['reminder_tunup'] = $this->table->generate();
+
 		$data['content'] = $this->load->view('home',$xdata,true);
 		$this->load->view('template',$data);
 	}
