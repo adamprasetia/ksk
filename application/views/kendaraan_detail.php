@@ -51,13 +51,23 @@
 	</div>	
 	<div class="panel-body">
 		<?=$servis_history?>	
-		<button class="btn btn-default btn-block" onclick="load_more(this)" data-kendaraan-kode="<?=$kendaraan->kode?>" data-offset="10" data-href="<?=base_url('index.php/kendaraan/servis_history_more')?>">Load More</button>
+		<button id="more" class="btn btn-default btn-block" onclick="load_more(this)" data-kendaraan-kode="<?=$kendaraan->kode?>" data-offset="10" data-href="<?=base_url('index.php/kendaraan/servis_history_more')?>">Load More</button>
 	</div>
 </div>
 <script>
-	$(document).ready(function(){
+ $(document).ready(function() {
+      $(window).scroll(function() {
+          if ($("#more").length > 0 && $("#more").is(":visible")) {
+              var r = $("#more").offset();
+              var i = 30;
+              if ($(window).scrollTop() + $(window).height() >= r.top - i) {
+                  load_more($("#more"));
+                  return false
+              }
+          }
+      })
+  });
 
-	});
 	function load_more(e){
     $(e).hide();
     $.ajax({
