@@ -5,7 +5,7 @@ class General_mdl extends CI_Model {
 		$this->db->where($field,$value);
 		return $this->db->get($table_name);	
 	}			
-	function get_servis_history($kendaraan_id){
+	function get_servis_history($kendaraan_id,$offset=0){
 		$this->db->select(array(
 			'servis.tanggal',
 			'komponen.nama as komponen_nama',
@@ -17,6 +17,8 @@ class General_mdl extends CI_Model {
 		$this->db->join('servis_aksi','servis_aksi.kode=servis_detail.aksi','left');
 		$this->db->where('servis.kendaraan',$kendaraan_id);
 		$this->db->order_by('servis.tanggal','desc');
+		$this->db->limit(10);
+		$this->db->offset($offset);
 		return $this->db->get('servis');
 	}	
 }

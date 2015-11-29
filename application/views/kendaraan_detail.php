@@ -51,5 +51,31 @@
 	</div>	
 	<div class="panel-body">
 		<?=$servis_history?>	
+		<button class="btn btn-default btn-block" onclick="load_more(this)" data-kendaraan-kode="<?=$kendaraan->kode?>" data-offset="10" data-href="<?=base_url('index.php/kendaraan/servis_history_more')?>">Load More</button>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+
+	});
+	function load_more(e){
+    $(e).hide();
+    $.ajax({
+        url: $(e).attr("data-href"),
+        type: "POST",
+        datatype: "json",
+        data: {
+            kendaraan_kode: $(e).attr("data-kendaraan-kode"),
+            offset: $(e).attr("data-offset")
+        },
+        success: function(t) {
+          jsondata = $.parseJSON(t);
+          if (jsondata.status == true) {
+              $("#tbl-servis").append(jsondata.result);
+              $(e).attr("data-offset", jsondata.offset);
+              $(e).show();
+          }
+        }
+    })
+	}
+</script>

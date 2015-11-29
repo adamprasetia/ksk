@@ -7,7 +7,7 @@ function tbl_tmp(){
 }
 function tbl_tmp_servis(){
 	$data = array(
-		'table_open'=>'<table border="0" cellpadding="4" cellspacing="0" class="table table-striped table-bordered table-servis">'
+		'table_open'=>'<table id="tbl-servis" border="0" cellpadding="4" cellspacing="0" class="table table-striped table-bordered table-servis">'
 	);
 	return $data;
 }

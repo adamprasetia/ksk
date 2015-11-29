@@ -10,6 +10,7 @@
 	<link href="<?=base_url('assets/lib/jquery-ui-1.11.4.custom/jquery-ui.css')?>" type="text/css" rel="stylesheet"/>
 	<link href="<?=base_url('assets/css/sticky-footer.css')?>" type="text/css" rel="stylesheet"/>
 	<link href="<?=base_url('assets/css/style.css')?>" type="text/css" rel="stylesheet"/>
+	<script src="<?=base_url('assets/lib/jquery-1.11.3.min.js')?>"/></script>
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -104,7 +105,6 @@
     </div>
   </footer>  
 
-	<script src="<?=base_url('assets/lib/jquery-1.11.3.min.js')?>"/></script>
 	<script src="<?=base_url('assets/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js')?>"/></script>
 	<script src="<?=base_url('assets/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js')?>"/></script>
 	<script src="<?=base_url('assets/lib/price_format_plugin.js')?>"/></script>

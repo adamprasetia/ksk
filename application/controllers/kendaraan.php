@@ -186,4 +186,24 @@ class Kendaraan extends MY_Controller {
 			$data['content'] = $this->load->view('kendaraan_detail',$xdata,true);
 			$this->load->view('template',$data);		
 	}
+	public function servis_history_more(){
+		if(!$this->input->is_ajax_request()){
+			show_404();
+			exit;
+		}
+		$kendaraan_kode = $this->input->post('kendaraan_kode');
+		$offset = $this->input->post('offset');
+		$return=array('status'=>false,'result'=>'');
+		$result = $this->general_mdl->get_servis_history($kendaraan_kode,$offset);
+		if($result->num_rows()>0){
+			$data['result'] = $result->result();
+			$data['offset'] = $offset;
+			$return=array(
+				'status'=>true,
+				'result'=>$this->load->view('servis_history_more',$data,true),
+				'offset'=>$offset+10
+			);
+		}
+		echo json_encode($return);
+	}
 }
