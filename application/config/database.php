@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-if($_SERVER['HTTP_HOST']=='localhost'){
+if($_SERVER['HTTP_HOST']=='ksk.com'){
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
