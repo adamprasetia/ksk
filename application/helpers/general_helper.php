@@ -164,8 +164,8 @@ function format_dmy($date){
 function timeago($waktu){
     $selisih = time() - $waktu;
 
-    if( $selisih < 1 ) {
-        return 'baru saja';
+    if( $selisih < (24 * 60 * 60) ) {
+        return 'hari ini';
     }
 
     $kondisi = array(
@@ -173,16 +173,17 @@ function timeago($waktu){
              30 * 24 * 60 * 60 => 'bulan',
               7 * 24 * 60 * 60 => 'minggu',
                   24 * 60 * 60 => 'hari',
-                       60 * 60 => 'jam',
-                            60 => 'menit',
-                             1 => 'detik'
     );
 
     foreach( $kondisi as $detik => $satuan ) {
         $d = $selisih / $detik;
         if( $d >= 1 ) {
             $r = round( $d );
-            return $r . ' ' . $satuan . ' lalu';
+            if($r==1&&$satuan=='hari'){
+                return "kemarin";
+            }else{
+                return $r . ' ' . $satuan . ' lalu';
+            }
         }
     }
 }
