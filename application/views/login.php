@@ -26,7 +26,7 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<?=anchor('home',APP_NAME,array('class'=>'navbar-brand','title'=>APP_TITLE)))?>
+				<?=anchor('home',APP_NAME,array('class'=>'navbar-brand','title'=>APP_TITLE))?>
 			</div>
 		</div>
 	</nav>
