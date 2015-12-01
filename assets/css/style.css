@@ -106,7 +106,7 @@ body{
 textarea.sig{
   display:none;
 }
-@media (max-width: 991px) {
+@media (max-width: 1150px) {
     .navbar-header {
         float: none;
     }

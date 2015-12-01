@@ -17,7 +17,7 @@
 </div>	
 <div class="panel panel-default">
 	<div class="panel-heading">
-		Reminder Tunup	
+		Reminder Tuneup	
 	</div>	
 	<div class="panel-body">
 		<div class="table-responsive">
@@ -25,10 +25,10 @@
 		</div>	
 		<p>Keterangan :</p>
 		<ul>
-			<li><label class="label label-primary">undefined</label> : Belum Pernah Tunup</li>	
-			<li><label class="label label-success">sehat</label> : Tunup 4 Bulan Sekali</li>	
-			<li><label class="label label-warning">warning</label> : Telat tunup lebih dari 4 bulan</li>	
-			<li><label class="label label-danger">danger</label> : Telat tunup lebih dari 8 bulan</li>	
+			<li><label class="label label-primary">undefined</label> : Belum Pernah Tuneup</li>	
+			<li><label class="label label-success">sehat</label> : Tuneup 4 Bulan Sekali</li>	
+			<li><label class="label label-warning">warning</label> : Telat tuneup lebih dari 4 bulan</li>	
+			<li><label class="label label-danger">danger</label> : Telat tuneup lebih dari 8 bulan</li>	
 		</ul>	
 	</div>	
 </div>	

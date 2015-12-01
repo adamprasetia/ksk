@@ -25,7 +25,7 @@ class Reminder_mdl extends CI_Model {
 		if($result->num_rows() > 0){
 			return timeago(strtotime($result->row()->tanggal));
 		}else{
-			return "Belum Pernah Tunup";
+			return "Belum Pernah Tuneup";
 		}
 	}
 }

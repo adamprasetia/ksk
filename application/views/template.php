@@ -32,7 +32,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<?=anchor('home',APP_NAME,array('class'=>'navbar-brand'))?>
+				<?=anchor('home',APP_NAME,array('class'=>'navbar-brand','title'=>APP_TITLE))?>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">

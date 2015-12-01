@@ -37,7 +37,8 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 /* Tambahan */
-define('APP_NAME',		'KSK 2015');
+define('APP_NAME',		'SIPPKOPS DKP 2015');
+define('APP_TITLE',		'Sistem Informasi Pelaporan Pemeliharaan Kendaraan Operasional Pengangkutan Sampah DKP');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
