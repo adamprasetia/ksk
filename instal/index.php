@@ -9,11 +9,11 @@
 			<h1>Instalation - SIPPKOPS DKP 2015</h1>
 			<hr>
 			<div class="form-group">
-				<label for="host">Host</label>
+				<label for="host">Masukan nama host mysql anda, misal : localhost</label>
 				<input name="host" class="form-control">
 			</div>	
 			<div class="form-group">
-				<label for="user">User</label>
+				<label for="user">Masukan username dari mysql anda, misal : root (untuk admin)</label>
 				<input type="text" name="user" class="form-control">
 			</div>	
 			<div class="form-group">
