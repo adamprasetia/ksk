@@ -1,5 +1,8 @@
 <?php
-
+if(is_dir('instal')){
+	header("Location: http://".$_SERVER["SERVER_NAME"]."/ksk/instal");
+	exit;
+}
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
