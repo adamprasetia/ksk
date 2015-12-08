@@ -1,6 +1,9 @@
 <?php
+$root               = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+$root              .= "://".$_SERVER['HTTP_HOST'];
+$root              .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 if(is_dir('instal')){
-	header("Location: http://".$_SERVER["SERVER_NAME"]."/ksk/instal");
+	header("Location: ".$root."instal");
 	exit;
 }
 /*
