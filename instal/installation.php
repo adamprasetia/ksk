@@ -78,7 +78,7 @@
 				</pre>	
 			</li>
 			<li>Selanjutnya hapus folder <b>instal</b> pada program ini</li>
-			<li>Jalankan program dengan format <b>http://nama_hosting/ksk</b>, contohnya : <b>http://localhost/ksk</b></li>
+			<li>Jalankan program dengan format <b>http://nama_hosting/nama_folder</b>, contohnya : <b>http://localhost/ksk</b></li>
 			<li>Login dengan username dan password bawaan yakni : 
 				<ul>
 					<li>username : damz</li>	
