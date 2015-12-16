@@ -5,10 +5,59 @@
 -- HeidiSQL Version:             9.3.0.4984
 -- --------------------------------------------------------
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
 -- Dumping database structure for kartu_sehat_kendaraan
 DROP DATABASE IF EXISTS `kartu_sehat_kendaraan`;
-CREATE DATABASE IF NOT EXISTS `kartu_sehat_kendaraan`;
+CREATE DATABASE IF NOT EXISTS `kartu_sehat_kendaraan` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `kartu_sehat_kendaraan`;
+
+
+-- Dumping structure for table kartu_sehat_kendaraan.anggaran
+DROP TABLE IF EXISTS `anggaran`;
+CREATE TABLE IF NOT EXISTS `anggaran` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `norek` varchar(50) NOT NULL,
+  `tanggal` date NOT NULL,
+  `tipe` varchar(10) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `user_create` varchar(50) NOT NULL,
+  `date_create` datetime NOT NULL,
+  `user_update` varchar(50) NOT NULL,
+  `date_update` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kartu_sehat_kendaraan.anggaran: ~2 rows (approximately)
+/*!40000 ALTER TABLE `anggaran` DISABLE KEYS */;
+INSERT INTO `anggaran` (`id`, `norek`, `tanggal`, `tipe`, `jumlah`, `user_create`, `date_create`, `user_update`, `date_update`) VALUES
+	(1, '123', '2015-02-01', 'A01', 50000, 'damz', '2015-12-16 06:55:10', 'damz', '2015-12-16 21:54:48'),
+	(2, '132', '2015-01-01', 'A02', 20000, 'damz', '2015-12-16 06:59:17', 'damz', '2015-12-16 21:54:35');
+/*!40000 ALTER TABLE `anggaran` ENABLE KEYS */;
+
+
+-- Dumping structure for table kartu_sehat_kendaraan.anggaran_tipe
+DROP TABLE IF EXISTS `anggaran_tipe`;
+CREATE TABLE IF NOT EXISTS `anggaran_tipe` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kode` varchar(10) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `user_create` varchar(50) NOT NULL,
+  `date_create` datetime NOT NULL,
+  `user_update` varchar(50) NOT NULL,
+  `date_update` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table kartu_sehat_kendaraan.anggaran_tipe: ~2 rows (approximately)
+/*!40000 ALTER TABLE `anggaran_tipe` DISABLE KEYS */;
+INSERT INTO `anggaran_tipe` (`id`, `kode`, `nama`, `user_create`, `date_create`, `user_update`, `date_update`) VALUES
+	(1, 'A01', 'Anggaran Murni', 'damz', '2015-12-16 06:38:18', 'damz', '2015-12-16 06:38:39'),
+	(2, 'A02', 'Anggaran Perubahan', 'damz', '2015-12-16 06:38:31', '', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `anggaran_tipe` ENABLE KEYS */;
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.kendaraan
@@ -127,7 +176,7 @@ INSERT INTO `komponen` (`id`, `kode`, `nama`, `group`, `harga`, `satuan`, `user_
 	(25, 'KOM-25', 'Ban Luar', 'G3', 0, 'U', 'damz', '2015-10-31 15:31:05', '', '0000-00-00 00:00:00'),
 	(26, 'KOM-26', 'Ban Dalam', 'G3', 0, 'U', 'damz', '2015-10-31 15:31:12', '', '0000-00-00 00:00:00'),
 	(27, 'KOM-27', 'Lainnya', 'GL', 0, 'U', 'damz', '2015-11-01 12:37:37', '', '0000-00-00 00:00:00'),
-	(28, 'KOM-28', 'Servis Tuneup', 'GL', 0, 'U', 'damz', '2015-11-28 00:09:27', 'damz', '2015-12-02 05:47:33');
+	(28, 'KOM-28', 'Servis Tuneup', 'GL', 100000, 'U', 'damz', '2015-11-28 00:09:27', 'damz', '2015-12-16 06:58:41');
 /*!40000 ALTER TABLE `komponen` ENABLE KEYS */;
 
 
@@ -318,7 +367,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table kartu_sehat_kendaraan.user: ~3 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `fullname`, `username`, `password`, `level`, `status`, `ip_login`, `user_agent`, `date_login`, `user_create`, `date_create`, `user_update`, `date_update`) VALUES
-	(1, 'Adam Prasetia', 'damz', '123', 'ABK', 'ON', '127.0.0.1', 'Windows 7(Google Chrome 46.0.2490.86)', '2015-12-02 06:45:52', '', '0000-00-00 00:00:00', 'damz', '2015-11-28 02:35:55'),
+	(1, 'Adam Prasetia', 'damz', '123', 'ABK', 'ON', '127.0.0.1', 'Windows 7(Google Chrome 47.0.2526.80)', '2015-12-16 21:12:59', '', '0000-00-00 00:00:00', 'damz', '2015-11-28 02:35:55'),
 	(35, 'Wahyuni Priska Agustin', 'uni', '123', 'ABK', 'ON', '::1', 'Windows 8.1(Google Chrome 46.0.2490.80)', '2015-11-01 15:01:31', 'damz', '2015-11-01 15:01:27', 'damz', '2015-11-28 02:35:37'),
 	(36, 'adben', 'adben', '123', 'ABB', 'OFF', '127.0.0.1', 'Windows 7(Google Chrome 46.0.2490.86)', '2015-11-22 14:11:22', 'damz', '2015-11-22 14:11:18', 'damz', '2015-11-28 02:35:45');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
