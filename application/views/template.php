@@ -39,9 +39,11 @@
 					<li class="dropdown <?=($this->uri->segment(1)=='master'?'active':"")?> <?=($this->session->userdata('user_level')<>'ABK'?"hide":"")?>">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-hdd"></span> Master Data <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
+							<li class="<?=($this->uri->segment(2)=='kendaraan'?'active':"")?>"><?=anchor('kendaraan','<span class="glyphicon glyphicon-bed"></span> Kendaraan')?></li>
 							<li class="<?=($this->uri->segment(2)=='kendaraan_tipe'?'active':"")?>"><?=anchor('master/kendaraan_tipe','<span class="glyphicon glyphicon-bed"></span> Tipe Kendaraan')?></li>
 							<li class="<?=($this->uri->segment(2)=='kendaraan_status'?'active':"")?>"><?=anchor('master/kendaraan_status','<span class="glyphicon glyphicon-bed"></span> Status Kendaraan')?></li>
 							<li role="separator" class="divider"></li>
+							<li class="<?=($this->uri->segment(2)=='komponen'?'active':"")?>"><?=anchor('komponen','<span class="glyphicon glyphicon-cog"></span> Komponen')?></li>
 							<li class="<?=($this->uri->segment(2)=='komponen_group'?'active':"")?>"><?=anchor('master/komponen_group','<span class="glyphicon glyphicon-cog"></span> Group Komponen')?></li>
 							<li class="<?=($this->uri->segment(2)=='komponen_satuan'?'active':"")?>"><?=anchor('master/komponen_satuan','<span class="glyphicon glyphicon-cog"></span> Satuan Komponen')?></li>
 							<li role="separator" class="divider"></li>
@@ -50,6 +52,8 @@
 							<li role="separator" class="divider"></li>
 							<li class="<?=($this->uri->segment(2)=='user_level'?'active':"")?>"><?=anchor('master/user_level','<span class="glyphicon glyphicon-user"></span> User Level')?></li>
 							<li class="<?=($this->uri->segment(2)=='user_status'?'active':"")?>"><?=anchor('master/user_status','<span class="glyphicon glyphicon-user"></span> User Status')?></li>
+							<li role="separator" class="divider"></li>
+							<li class="<?=($this->uri->segment(2)=='user_level'?'active':"")?>"><?=anchor('master/anggaran_tipe','<span class="glyphicon glyphicon-usd"></span> Anggaran Tipe')?></li>
 	          </ul>
         	</li>					
 					<li class="dropdown <?=($this->uri->segment(1)=='user'?'active':"")?> <?=($this->session->userdata('user_level')<>'ABK'?"hide":"")?>">
@@ -59,18 +63,13 @@
 							<li><?=anchor('user','<span class="glyphicon glyphicon-user"></span> List User')?></li>
 	          </ul>
         	</li>					
-					<li class="dropdown <?=($this->uri->segment(1)=='kendaraan'?'active':"")?> ">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bed"></span> Kendaraan <span class="caret"></span></a>
+					<li class="dropdown <?=($this->uri->segment(1)=='anggaran'?'active':"")?> ">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-usd"></span> Anggaran <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-							<li><?=anchor('kendaraan/add','<span class="glyphicon glyphicon-bed"></span> Tambah Kendaraan')?></li>
-							<li><?=anchor('kendaraan','<span class="glyphicon glyphicon-bed"></span> List Kendaraan')?></li>
-	          </ul>
-        	</li>					
-					<li class="dropdown <?=($this->uri->segment(1)=='komponen'?'active':"")?> ">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> Komponen <span class="caret"></span></a>
-	          <ul class="dropdown-menu">
-							<li><?=anchor('komponen/add','<span class="glyphicon glyphicon-cog"></span> Tambah Komponen')?></li>
-							<li><?=anchor('komponen','<span class="glyphicon glyphicon-cog"></span> List Komponen')?></li>
+							<li><?=anchor('anggaran/add','<span class="glyphicon glyphicon-usd"></span> Tambah Anggaran')?></li>
+							<li><?=anchor('anggaran','<span class="glyphicon glyphicon-usd"></span> List Anggaran')?></li>
+							<li role="separator" class="divider"></li>
+							<li><?=anchor('anggaran_rekap','<span class="glyphicon glyphicon-usd"></span> Rekap Anggaran')?></li>
 	          </ul>
         	</li>					
 					<li class="dropdown <?=($this->uri->segment(1)=='servis'?'active':"")?> ">

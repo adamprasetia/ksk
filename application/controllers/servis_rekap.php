@@ -101,6 +101,8 @@ class Servis_rekap extends MY_Controller {
 			$pdf->setX(30);
 			$pdf->Cell(0,5,'Nomor Polisi : '.$this->general_mdl->get_from_field('kendaraan','id',$this->input->get('kendaraan'))->row()->nopol,0,0,'L');
 		}
+		$pdf->Ln(15);
+		$pdf->Cell(0,1,'','T',0,'C');
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial','B',10);
 		$pdf->Cell(0,5,'REKAPITULASI SERVIS',0,0,'C');

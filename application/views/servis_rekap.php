@@ -4,7 +4,7 @@
 		<?=$pdf_btn?>
 		<ol class="breadcrumb pull-right">
 			<li><?=anchor('home','<span class="glyphicon glyphicon-home"></span> Home')?></li>
-			<li class="active">Kendaraan</li>
+			<li class="active">Rekap Servis</li>
 		</ol>
 	</div>	
 	<div class="panel-body">

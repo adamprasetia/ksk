@@ -48,10 +48,18 @@
 $active_group = 'default';
 $active_record = TRUE;
 
+if($_SERVER['HTTP_HOST']=='localhost'){
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
 $db['default']['database'] = 'kartu_sehat_kendaraan';
+}else{
+$db['default']['hostname'] = 'mysql.idhostinger.com';
+$db['default']['username'] = 'u497638122_adam';
+$db['default']['password'] = 'zamzam';
+$db['default']['database'] = 'u497638122_ksk';	
+}
+
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 function tbl_tmp(){
     $data = array(
-        'table_open'=>'<table border="0" cellpadding="4" cellspacing="0" class="table table-striped table-bordered">'
+        'table_open'=>'<table border="0" cellpadding="4" cellspacing="0" class="table table-hover table-bordered">'
     );
     return $data;
 }

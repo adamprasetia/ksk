@@ -8,9 +8,9 @@
 	<link rel="shortcut icon" href="http://www.cianjurkab.go.id/images/cjr_icon.png" type="image/x-icon"/>
 	<title>Welcome to <?=APP_NAME?></title>	
 	<link href="<?=base_url('assets/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css')?>" type="text/css" rel="stylesheet"/>
-	<link href="<?=base_url('assets/css/signin.css')?>" type="text/css" rel="stylesheet"/>
 	<link href="<?=base_url('assets/css/sticky-footer.css')?>" type="text/css" rel="stylesheet"/>
 	<link href="<?=base_url('assets/css/style.css')?>" type="text/css" rel="stylesheet"/>
+	<link href="<?=base_url('assets/css/signin.css')?>" type="text/css" rel="stylesheet"/>
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

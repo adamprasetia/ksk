@@ -1,76 +1,73 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Komponen extends MY_Controller {
+class Anggaran extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('komponen_mdl');
+		$this->load->model('anggaran_mdl');
 	}
 	public function index(){
 		$offset = $this->general_lib->get_offset();
 		$limit = $this->general_lib->get_limit();
-		$total = $this->komponen_mdl->count_all();
+		$total = $this->anggaran_mdl->count_all();
 
-		$xdata['action'] = 'komponen/search'.$this->_filter();
-		$xdata['action_delete'] = 'komponen/delete'.$this->_filter();
-		$xdata['add_btn'] = anchor('komponen/add','<span class="glyphicon glyphicon-plus"></span> Tambah',array('class'=>'btn btn-success btn-sm'));
+		$xdata['action'] = 'anggaran/search'.$this->_filter();
+		$xdata['action_delete'] = 'anggaran/delete'.$this->_filter();
+		$xdata['add_btn'] = anchor('anggaran/add','<span class="glyphicon glyphicon-plus"></span> Tambah',array('class'=>'btn btn-success btn-sm'));
 		$xdata['delete_btn'] = '<button id="delete-btn" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Delete Checked</button>';
 
 		$this->table->set_template(tbl_tmp());
 		$head_data = array(
-			'kode'=>'Kode',
-			'nama'=>'Nama',
-			'group_nama'=>'Group',
-			'satuan_nama'=>'Satuan',
-			'harga'=>'Harga',
+			'norek'=>'Nomor Rekening',
+			'tanggal'=>'Tanggal',
+			'tipe_nama'=>'Tipe',
+			'jumlah'=>'Jumlah',
 		);
 		$heading[] = form_checkbox(array('id'=>'selectAll','value'=>1));
 		$heading[] = '#';
 		foreach($head_data as $r => $value){
-			$heading[] = anchor('komponen'.$this->_filter(array('order_column'=>"$r",'order_type'=>$this->general_lib->order_type($r))),"$value ".$this->general_lib->order_icon("$r"));
+			$heading[] = anchor('anggaran'.$this->_filter(array('order_column'=>"$r",'order_type'=>$this->general_lib->order_type($r))),"$value ".$this->general_lib->order_icon("$r"));
 		}		
 		$heading[] = 'Action';
 		$this->table->set_heading($heading);
-		$result = $this->komponen_mdl->get()->result();
+		$result = $this->anggaran_mdl->get()->result();
 		$i=1+$offset;
 		foreach($result as $r){
 			$this->table->add_row(
 				array('data'=>form_checkbox(array('name'=>'check[]','value'=>$r->id)),'width'=>'10px'),
 				$i++,
-				$r->kode,
-				$r->nama,
-				$r->group_nama,
-				$r->satuan_nama,
-				array('data'=>number_format($r->harga),'align'=>'right'),
-				anchor('komponen/edit/'.$r->id.$this->_filter(),'Edit')
-				."&nbsp;|&nbsp;".anchor('komponen/delete/'.$r->id.$this->_filter(),'Delete',array('onclick'=>"return confirm('you sure')"))
+				$r->norek,
+				format_dmy($r->tanggal),
+				$r->tipe_nama,
+				array('data'=>number_format($r->jumlah),'align'=>'right'),
+				anchor('anggaran/edit/'.$r->id.$this->_filter(),'Edit')
+				."&nbsp;|&nbsp;".anchor('anggaran/delete/'.$r->id.$this->_filter(),'Delete',array('onclick'=>"return confirm('you sure')"))
 			);
 		}
 		$xdata['table'] = $this->table->generate();
 		$xdata['total'] = page_total($offset,$limit,$total);
 		
 		$config = pag_tmp();
-		$config['base_url'] = site_url("komponen".$this->_filter());
+		$config['base_url'] = site_url("anggaran".$this->_filter());
 		$config['total_rows'] = $total;
 		$config['per_page'] = $limit;
 
 		$this->pagination->initialize($config); 
 		$xdata['pagination'] = $this->pagination->create_links();
 
-		$data['content'] = $this->load->view('komponen_list',$xdata,true);
+		$data['content'] = $this->load->view('anggaran_list',$xdata,true);
 		$this->load->view('template',$data);
 	}
 	public function search(){
 		$data = array(
 			'search'=>$this->input->post('search'),
 			'limit'=>$this->input->post('limit'),
-			'group'=>$this->input->post('group'),
-			'satuan'=>$this->input->post('satuan')
+			'tipe'=>$this->input->post('tipe')
 		);
-		redirect('komponen'.$this->_filter($data));		
+		redirect('anggaran'.$this->_filter($data));		
 	}
 	public function _filter($add = array()){
 		$str = '?avenger=1';
-		$data = array('order_column'=>0,'order_type'=>0,'limit'=>0,'offset'=>0,'search'=>0,'group'=>0,'satuan'=>0);
+		$data = array('order_column'=>0,'order_type'=>0,'limit'=>0,'offset'=>0,'search'=>0,'tipe'=>0);
 		$result = array_diff_key($data,$add);
 		foreach($result as $r => $val){			
 			if($this->input->get($r)<>''){
@@ -88,78 +85,66 @@ class Komponen extends MY_Controller {
 	}	
 	private function _field(){
 		$data = array(
-			'kode'=>$this->input->post('kode'),
-			'nama'=>$this->input->post('nama'),
-			'group'=>$this->input->post('group'),
-			'satuan'=>$this->input->post('satuan'),
-			'harga'=>str_replace(',', '', $this->input->post('harga'))
-
+			'norek'=>$this->input->post('norek'),
+			'tanggal'=>format_ymd($this->input->post('tanggal')),
+			'tipe'=>$this->input->post('tipe'),
+			'jumlah'=>str_replace(',', '', $this->input->post('jumlah'))
 		);
 		return $data;		
 	}
 	private function _set_rules(){
-		$this->form_validation->set_rules('kode','Kode','required|trim');
-		$this->form_validation->set_rules('nama','Nama','required|trim');
-		$this->form_validation->set_rules('group','Group','required|trim');
-		$this->form_validation->set_rules('satuan','Satuan','required|trim');
-		$this->form_validation->set_rules('harga','Harga','required|trim');
+		$this->form_validation->set_rules('norek','No Rekening','required|trim');
+		$this->form_validation->set_rules('tipe','Tipe','required|trim');
+		$this->form_validation->set_rules('jumlah','Jumlah','required|trim');
 	}
 	public function add(){
 		$this->_set_rules();
 		if($this->form_validation->run()===false){
-			$xdata['action'] = 'komponen/add'.$this->_filter();
-			$xdata['breadcrumb'] = 'komponen'.$this->_filter();
+			$xdata['action'] = 'anggaran/add'.$this->_filter();
+			$xdata['breadcrumb'] = 'anggaran'.$this->_filter();
 			$xdata['heading'] = 'New';
 			$xdata['owner'] = '';
-			$data['content'] = $this->load->view('komponen_form',$xdata,true);
+			$data['content'] = $this->load->view('anggaran_form',$xdata,true);
 			$this->load->view('template',$data);
 		}else{
 			$data = $this->_field();
 			$data['user_create'] = $this->session->userdata('user_login');
 			$data['date_create'] = date('Y-m-d H:i:s');
-			$this->komponen_mdl->add($data);
+			$this->anggaran_mdl->add($data);
 			$this->session->set_flashdata('alert','<div class="alert alert-success">Tambah Data Sukses</div>');
-			redirect('komponen/add'.$this->_filter());
+			redirect('anggaran/add'.$this->_filter());
 		}
 	}
 	public function edit($id){
 		$this->_set_rules();
 		if($this->form_validation->run()===false){
-			$xdata['row'] = $this->komponen_mdl->get_from_field('id',$id)->row();
-			$xdata['action'] = 'komponen/edit/'.$id.$this->_filter();
-			$xdata['breadcrumb'] = 'komponen'.$this->_filter();
+			$xdata['row'] = $this->anggaran_mdl->get_from_field('id',$id)->row();
+			$xdata['action'] = 'anggaran/edit/'.$id.$this->_filter();
+			$xdata['breadcrumb'] = 'anggaran'.$this->_filter();
 			$xdata['heading'] = 'Update';
 			$xdata['owner'] = owner($xdata['row']);
-			$data['content'] = $this->load->view('komponen_form',$xdata,true);
+			$data['content'] = $this->load->view('anggaran_form',$xdata,true);
 			$this->load->view('template',$data);
 		}else{
 			$data = $this->_field();
 			$data['user_update'] = $this->session->userdata('user_login');
 			$data['date_update'] = date('Y-m-d H:i:s');
-			$this->komponen_mdl->edit($id,$data);
+			$this->anggaran_mdl->edit($id,$data);
 			$this->session->set_flashdata('alert','<div class="alert alert-success">Edit Data Sukses</div>');
-			redirect('komponen/edit/'.$id.$this->_filter());
+			redirect('anggaran/edit/'.$id.$this->_filter());
 		}
 	}
 	public function delete($id=''){
 		if($id<>''){
-			$this->komponen_mdl->delete($id);
+			$this->anggaran_mdl->delete($id);
 		}
 		$check = $this->input->post('check');
 		if($check<>''){
 			foreach($check as $c){
-				$this->komponen_mdl->delete($c);
+				$this->anggaran_mdl->delete($c);
 			}
 		}
 		$this->session->set_flashdata('alert','<div class="alert alert-success">Delete Data Sukses</div>');
-		redirect('komponen'.$this->_filter());
+		redirect('anggaran'.$this->_filter());
 	}
-	public function get_harga($id=''){
-		$result = $this->komponen_mdl->get_from_field('id',$id);
-		$harga = 0;
-		if($result->num_rows()>0){
-			$harga =  $result->row()->harga;
-		}
-		echo number_format($harga);
-	}	
 }
