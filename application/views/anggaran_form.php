@@ -30,7 +30,7 @@
 		</div>
 		<div class="form-group form-inline">
 			<?=form_label('Jumlah','jumlah',array('class'=>'control-label'))?>
-			<?=form_input(array('name'=>'jumlah','class'=>'form-control input-sm input-uang','maxlength'=>'10','autocomplete'=>'off','value'=>set_value('jumlah',(isset($row->jumlah)?$row->jumlah:'')),'required'=>'required'))?>
+			<?=form_input(array('name'=>'jumlah','class'=>'form-control input-sm input-uang','maxlength'=>'15','autocomplete'=>'off','value'=>set_value('jumlah',(isset($row->jumlah)?$row->jumlah:'')),'required'=>'required'))?>
 			<small><?=form_error('jumlah')?></small>
 		</div>
 	</div>
