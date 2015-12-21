@@ -11,36 +11,34 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping database structure for kartu_sehat_kendaraan
-DROP DATABASE IF EXISTS `kartu_sehat_kendaraan`;
 CREATE DATABASE IF NOT EXISTS `kartu_sehat_kendaraan` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `kartu_sehat_kendaraan`;
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.anggaran
-DROP TABLE IF EXISTS `anggaran`;
 CREATE TABLE IF NOT EXISTS `anggaran` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `norek` varchar(50) NOT NULL,
   `tanggal` date NOT NULL,
   `tipe` varchar(10) NOT NULL,
-  `jumlah` int(11) NOT NULL,
+  `jumlah` bigint(20) NOT NULL,
   `user_create` varchar(50) NOT NULL,
   `date_create` datetime NOT NULL,
   `user_update` varchar(50) NOT NULL,
   `date_update` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kartu_sehat_kendaraan.anggaran: ~2 rows (approximately)
+-- Dumping data for table kartu_sehat_kendaraan.anggaran: ~3 rows (approximately)
 /*!40000 ALTER TABLE `anggaran` DISABLE KEYS */;
 INSERT INTO `anggaran` (`id`, `norek`, `tanggal`, `tipe`, `jumlah`, `user_create`, `date_create`, `user_update`, `date_update`) VALUES
 	(1, '123', '2015-02-01', 'A01', 50000, 'damz', '2015-12-16 06:55:10', 'damz', '2015-12-16 21:54:48'),
-	(2, '132', '2015-01-01', 'A02', 20000, 'damz', '2015-12-16 06:59:17', 'damz', '2015-12-16 21:54:35');
+	(2, '132', '2015-01-01', 'A02', 20000, 'damz', '2015-12-16 06:59:17', 'damz', '2015-12-16 21:54:35'),
+	(3, '003', '2015-12-21', 'A01', 100000000000, 'damz', '2015-12-21 22:02:24', 'damz', '2015-12-21 22:03:32');
 /*!40000 ALTER TABLE `anggaran` ENABLE KEYS */;
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.anggaran_tipe
-DROP TABLE IF EXISTS `anggaran_tipe`;
 CREATE TABLE IF NOT EXISTS `anggaran_tipe` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
@@ -61,7 +59,6 @@ INSERT INTO `anggaran_tipe` (`id`, `kode`, `nama`, `user_create`, `date_create`,
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.kendaraan
-DROP TABLE IF EXISTS `kendaraan`;
 CREATE TABLE IF NOT EXISTS `kendaraan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
@@ -87,7 +84,6 @@ INSERT INTO `kendaraan` (`id`, `kode`, `nopol`, `tipe`, `nomes`, `nocha`, `statu
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.kendaraan_status
-DROP TABLE IF EXISTS `kendaraan_status`;
 CREATE TABLE IF NOT EXISTS `kendaraan_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
@@ -108,7 +104,6 @@ INSERT INTO `kendaraan_status` (`id`, `kode`, `nama`, `user_create`, `date_creat
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.kendaraan_tipe
-DROP TABLE IF EXISTS `kendaraan_tipe`;
 CREATE TABLE IF NOT EXISTS `kendaraan_tipe` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
@@ -131,7 +126,6 @@ INSERT INTO `kendaraan_tipe` (`id`, `kode`, `nama`, `user_create`, `date_create`
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.komponen
-DROP TABLE IF EXISTS `komponen`;
 CREATE TABLE IF NOT EXISTS `komponen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
@@ -181,7 +175,6 @@ INSERT INTO `komponen` (`id`, `kode`, `nama`, `group`, `harga`, `satuan`, `user_
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.komponen_group
-DROP TABLE IF EXISTS `komponen_group`;
 CREATE TABLE IF NOT EXISTS `komponen_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
@@ -204,7 +197,6 @@ INSERT INTO `komponen_group` (`id`, `kode`, `nama`, `user_create`, `date_create`
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.komponen_satuan
-DROP TABLE IF EXISTS `komponen_satuan`;
 CREATE TABLE IF NOT EXISTS `komponen_satuan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
@@ -225,7 +217,6 @@ INSERT INTO `komponen_satuan` (`id`, `kode`, `nama`, `user_create`, `date_create
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.servis
-DROP TABLE IF EXISTS `servis`;
 CREATE TABLE IF NOT EXISTS `servis` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nomor` varchar(50) NOT NULL,
@@ -254,7 +245,6 @@ INSERT INTO `servis` (`id`, `nomor`, `kendaraan`, `tanggal`, `tipe`, `kilometer`
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.servis_aksi
-DROP TABLE IF EXISTS `servis_aksi`;
 CREATE TABLE IF NOT EXISTS `servis_aksi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
@@ -279,7 +269,6 @@ INSERT INTO `servis_aksi` (`id`, `kode`, `nama`, `user_create`, `date_create`, `
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.servis_detail
-DROP TABLE IF EXISTS `servis_detail`;
 CREATE TABLE IF NOT EXISTS `servis_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `servis` varchar(50) NOT NULL,
@@ -324,7 +313,6 @@ INSERT INTO `servis_detail` (`id`, `servis`, `komponen`, `komponen_lain`, `aksi`
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.servis_tipe
-DROP TABLE IF EXISTS `servis_tipe`;
 CREATE TABLE IF NOT EXISTS `servis_tipe` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
@@ -345,7 +333,6 @@ INSERT INTO `servis_tipe` (`id`, `kode`, `nama`, `user_create`, `date_create`, `
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.user
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(50) NOT NULL,
@@ -367,14 +354,13 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table kartu_sehat_kendaraan.user: ~3 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `fullname`, `username`, `password`, `level`, `status`, `ip_login`, `user_agent`, `date_login`, `user_create`, `date_create`, `user_update`, `date_update`) VALUES
-	(1, 'Adam Prasetia', 'damz', '123', 'ABK', 'ON', '127.0.0.1', 'Windows 7(Google Chrome 47.0.2526.80)', '2015-12-16 21:12:59', '', '0000-00-00 00:00:00', 'damz', '2015-11-28 02:35:55'),
+	(1, 'Adam Prasetia', 'damz', '123', 'ABK', 'ON', '127.0.0.1', 'Windows 7(Google Chrome 47.0.2526.106)', '2015-12-21 22:01:37', '', '0000-00-00 00:00:00', 'damz', '2015-11-28 02:35:55'),
 	(35, 'Wahyuni Priska Agustin', 'uni', '123', 'ABK', 'ON', '::1', 'Windows 8.1(Google Chrome 46.0.2490.80)', '2015-11-01 15:01:31', 'damz', '2015-11-01 15:01:27', 'damz', '2015-11-28 02:35:37'),
 	(36, 'adben', 'adben', '123', 'ABB', 'OFF', '127.0.0.1', 'Windows 7(Google Chrome 46.0.2490.86)', '2015-11-22 14:11:22', 'damz', '2015-11-22 14:11:18', 'damz', '2015-11-28 02:35:45');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.user_level
-DROP TABLE IF EXISTS `user_level`;
 CREATE TABLE IF NOT EXISTS `user_level` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
@@ -395,7 +381,6 @@ INSERT INTO `user_level` (`id`, `kode`, `nama`, `user_create`, `date_create`, `u
 
 
 -- Dumping structure for table kartu_sehat_kendaraan.user_status
-DROP TABLE IF EXISTS `user_status`;
 CREATE TABLE IF NOT EXISTS `user_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode` varchar(10) NOT NULL,
