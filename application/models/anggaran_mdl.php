@@ -56,4 +56,10 @@ class anggaran_mdl extends CI_Model {
 		}
 		return $data;
 	}		
+	function chart(){
+		$this->db->select('year(tanggal) as y,sum(jumlah) as item1');
+		$this->db->group_by('year(tanggal)');
+		$this->db->order_by('tanggal','asc');
+		return $this->db->get($this->tbl_name);	
+	}
 }

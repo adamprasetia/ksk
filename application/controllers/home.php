@@ -4,6 +4,8 @@ class Home extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('kendaraan_mdl');
+		$this->load->model('komponen_mdl');
+		$this->load->model('anggaran_mdl');
 		$this->load->model('reminder_mdl');
 		$this->load->helper('reminder');
 	}

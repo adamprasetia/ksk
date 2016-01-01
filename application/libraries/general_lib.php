@@ -6,9 +6,19 @@ class General_lib{
 		$this->ci = &get_instance();
 		$this->ci->load->model('user_mdl');
 	}
-	public function get_username(){
-		$result = $this->ci->user_mdl->get_from_field('username',$this->ci->session->userdata('user_login'))->row();
-		return $result->fullname;
+	public function getFullname(){
+		$result = $this->ci->user_mdl->get_from_field('username',$this->ci->session->userdata('user_login'));
+		if($result->num_rows() > 0){
+			return $result->row()->fullname;
+		}
+		return "";
+	}
+	public function getLevel(){
+		$result = $this->ci->user_mdl->getLevel($this->ci->session->userdata('user_login'));
+		if($result->num_rows() > 0){
+			return $result->row()->nama;
+		}
+		return "";
 	}
 	public function get_limit(){
 		$result = $this->ci->input->get('limit');

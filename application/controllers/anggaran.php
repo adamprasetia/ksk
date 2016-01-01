@@ -147,4 +147,8 @@ class Anggaran extends MY_Controller {
 		$this->session->set_flashdata('alert','<div class="alert alert-success">Delete Data Sukses</div>');
 		redirect('anggaran'.$this->_filter());
 	}
+	public function chart(){
+		$result = $this->anggaran_mdl->chart()->result();
+		echo json_encode($result);
+	}
 }

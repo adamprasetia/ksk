@@ -69,5 +69,11 @@ class User_mdl extends CI_Model {
 			$data[$r->kode] = $r->nama;
 		}
 		return $data;
-	}	
+	}
+	function getLevel($username){
+		$this->db->select('user_level.nama');
+		$this->db->join('user_level','user.level=user_level.kode','left');
+		$this->db->where('username',$username);
+		return $this->db->get($this->tbl_name);
+	}
 }

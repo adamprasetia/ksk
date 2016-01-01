@@ -1,13 +1,20 @@
-<ol class="breadcrumb">
-	<li><?=anchor('home','<span class="glyphicon glyphicon-home"></span> Home')?></li>
-  <li><?=anchor($breadcrumb,'Kendaraan')?></li>
-  <li class="active">Detail</li>
-</ol>
-<div class="panel panel-default">
-	<div class="panel-heading">
+<section class="content-header">
+	<h1>
+		Kendaraan
+		<small>Detail</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><?=anchor('home','<span class="glyphicon glyphicon-home"></span> Home')?></li>
+	  	<li><?=anchor($breadcrumb,'Kendaraan')?></li>
+	  	<li class="active">Detail</li>
+	</ol>
+</section>
+<section class="content">
+<div class="box box-default">
+	<div class="box-header">
 		Detail	
 	</div>	
-	<div class="panel-body">
+	<div class="box-body">
 		<div class="form-group form-inline">
 			<?=form_label('Kode Kendaraan','',array('class'=>'control-label'))?>
 			:&nbsp;&nbsp;<?=$kendaraan->kode?>
@@ -30,11 +37,11 @@
 		</div>
 	</div>
 </div>
-<div class="panel panel-default">
-	<div class="panel-heading">
+<div class="box box-default">
+	<div class="box-header">
 		Status
 	</div>	
-	<div class="panel-body">
+	<div class="box-body">
 		<div class="form-group form-inline">
 			<?=form_label('Oli Mesin','',array('class'=>'control-label'))?>
 			:&nbsp;&nbsp;<?=olie_mesin_status($this->reminder_mdl->terakhir_ganti_oli($kendaraan->kode))?>
@@ -45,15 +52,16 @@
 		</div>
 	</div>
 </div>
-<div class="panel panel-default">
-	<div class="panel-heading">
+<div class="box box-default">
+	<div class="box-header">
 		Service History	
 	</div>	
-	<div class="panel-body">
+	<div class="box-body">
 		<?=$servis_history?>	
 		<button id="more" class="btn btn-default btn-block" onclick="load_more(this)" data-kendaraan-kode="<?=$kendaraan->kode?>" data-offset="10" data-href="<?=base_url('index.php/kendaraan/servis_history_more')?>">Load More</button>
 	</div>
 </div>
+</section>
 <script>
  $(document).ready(function() {
       $(window).scroll(function() {
