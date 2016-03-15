@@ -54,7 +54,7 @@ $db['default']['username'] = 'root';
 $db['default']['password'] = '';
 $db['default']['database'] = 'kartu_sehat_kendaraan';
 }else{
-$db['default']['hostname'] = 'mysql.idhostinger.com';
+$db['default']['hostname'] = '';
 $db['default']['username'] = 'u919737175_adam';
 $db['default']['password'] = 'zamzam';
 $db['default']['database'] = 'u919737175_ksk';	
